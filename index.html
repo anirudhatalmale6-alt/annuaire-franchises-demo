@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Annuaire des franchises au Canada &middot; demonstration</title>
+<title>Annuaire des franchises &middot; Canada, Etats-Unis, Europe</title>
 <style>
 *{box-sizing:border-box}
 :root{
@@ -16,12 +16,13 @@ a{color:inherit;text-decoration:none}
 button{font-family:inherit}
 .wrap{max-width:1240px;margin:0 auto;padding:0 20px}
 
-/* ---------- entete ---------- */
 header{background:var(--encre);color:#fff;position:sticky;top:0;z-index:30}
 .top{display:flex;align-items:center;gap:18px;padding:14px 20px}
 .logo{font-weight:800;font-size:19px;letter-spacing:-.2px}
 .logo b{color:var(--lime)}
+.logo span{font-weight:400;font-size:12px;color:#8b93a5;margin-left:8px}
 .top nav{display:flex;gap:18px;font-size:13.5px;color:#aeb5c2;margin-left:8px}
+.top nav a{cursor:pointer}
 .top nav a:hover{color:#fff}
 .droite{margin-left:auto;display:flex;align-items:center;gap:12px}
 .lang{display:flex;border:1px solid #2c313d;border-radius:7px;overflow:hidden}
@@ -29,33 +30,35 @@ header{background:var(--encre);color:#fff;position:sticky;top:0;z-index:30}
   cursor:pointer}
 .lang button.on{background:var(--lime);color:var(--encre);font-weight:700}
 
-/* ---------- banniere demo ---------- */
 .demo{background:#fff6d6;border-bottom:1px solid #f0e2a8;color:#6b5a12;
   font-size:12.5px;padding:9px 0}
 .demo b{color:#4a3d06}
 
-/* ---------- hero ---------- */
 .hero{background:var(--encre);color:#fff;padding:34px 0 40px}
-.hero h1{margin:0 0 8px;font-size:31px;line-height:1.2;letter-spacing:-.5px;max-width:720px}
-.hero p{margin:0 0 20px;color:#aeb5c2;font-size:15px;max-width:640px}
+.hero h1{margin:0 0 8px;font-size:31px;line-height:1.2;letter-spacing:-.5px;max-width:760px}
+.hero p{margin:0 0 20px;color:#aeb5c2;font-size:15px;max-width:660px}
 .rech{display:flex;gap:10px;max-width:720px}
 .rech input{flex:1;border:0;border-radius:9px;padding:13px 15px;font-size:15px;
-  font-family:inherit}
+  font-family:inherit;min-width:0}
 .rech input:focus{outline:2px solid var(--lime)}
 .rech button{background:var(--lime);color:var(--encre);border:0;border-radius:9px;
-  padding:0 22px;font-weight:700;font-size:14.5px;cursor:pointer}
+  padding:0 22px;font-weight:700;font-size:14.5px;cursor:pointer;white-space:nowrap}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .chips button{background:#1b202a;border:1px solid #2c313d;color:#c9cfdb;border-radius:20px;
   padding:6px 13px;font-size:12.5px;cursor:pointer}
 .chips button:hover{border-color:var(--lime);color:#fff}
 .chips button.on{background:var(--lime);border-color:var(--lime);color:var(--encre);
   font-weight:600}
+.marches{display:flex;flex-wrap:wrap;gap:22px;margin-top:24px;
+  border-top:1px solid #222834;padding-top:18px}
+.marche{font-size:12.5px;color:#8b93a5}
+.marche b{display:block;color:#fff;font-size:20px;font-weight:800;letter-spacing:-.3px}
 
-/* ---------- corps ---------- */
-.corps{display:grid;grid-template-columns:264px 1fr;gap:26px;padding:26px 0 60px;
+.corps{display:grid;grid-template-columns:272px 1fr;gap:26px;padding:26px 0 60px;
   align-items:start}
 .filtres{background:var(--blanc);border:1px solid var(--trait);border-radius:12px;
-  padding:4px 16px 16px;position:sticky;top:74px;box-shadow:var(--ombre)}
+  padding:4px 16px 16px;position:sticky;top:74px;box-shadow:var(--ombre);
+  max-height:calc(100vh - 96px);overflow:auto}
 .fgrp{padding:14px 0;border-bottom:1px solid var(--trait)}
 .fgrp:last-child{border-bottom:0}
 .fgrp h3{margin:0 0 9px;font-size:11.5px;text-transform:uppercase;letter-spacing:.7px;
@@ -69,7 +72,7 @@ select,.nb{width:100%;border:1px solid var(--trait);border-radius:8px;padding:9p
 .raz{width:100%;background:#fff;border:1px solid var(--trait);border-radius:8px;
   padding:9px;font-size:13px;cursor:pointer;color:var(--gris);margin-top:14px}
 .raz:hover{border-color:var(--encre);color:var(--encre)}
-.scroll{max-height:212px;overflow:auto;margin-right:-6px;padding-right:6px}
+.scroll{max-height:206px;overflow:auto;margin-right:-6px;padding-right:6px}
 
 .entete-res{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
 .entete-res .cpt{font-size:14px;color:var(--gris)}
@@ -83,8 +86,10 @@ select,.nb{width:100%;border:1px solid var(--trait);border-radius:8px;padding:9p
   padding:16px 17px 14px;display:flex;flex-direction:column;gap:9px;
   box-shadow:var(--ombre);transition:border-color .15s,transform .15s}
 .fiche:hover{border-color:#b9c0cd;transform:translateY(-1px)}
+.fiche .haut{display:flex;align-items:baseline;gap:8px}
 .fiche .cat{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--gris);
-  font-weight:600}
+  font-weight:600;flex:1}
+.fiche .org{font-size:11px;color:#8b93a5;white-space:nowrap}
 .fiche h2{margin:0;font-size:17px;letter-spacing:-.2px}
 .fiche .res{font-size:13.2px;color:#4e5563;flex:1}
 .fiche dl{margin:0;display:grid;grid-template-columns:auto auto;gap:4px 10px;
@@ -105,7 +110,6 @@ select,.nb{width:100%;border:1px solid var(--trait);border-radius:8px;padding:9p
   border-radius:9px;padding:11px 26px;font-size:14px;cursor:pointer}
 .plus:hover{border-color:var(--encre)}
 
-/* ---------- barre de comparaison ---------- */
 .barcmp{position:fixed;left:0;right:0;bottom:0;background:var(--encre);color:#fff;
   z-index:40;transform:translateY(110%);transition:transform .18s}
 .barcmp.on{transform:none}
@@ -117,10 +121,9 @@ select,.nb{width:100%;border:1px solid var(--trait);border-radius:8px;padding:9p
 .barcmp .go{margin-left:auto;background:var(--lime);color:var(--encre);border:0;
   border-radius:8px;padding:10px 18px;font-weight:700;font-size:13.5px;cursor:pointer}
 
-/* ---------- panneau ---------- */
 .voile{position:fixed;inset:0;background:rgba(16,19,25,.55);z-index:50;display:none}
 .voile.on{display:block}
-.panneau{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:#fff;
+.panneau{position:fixed;top:0;right:0;bottom:0;width:min(620px,100%);background:#fff;
   z-index:51;overflow:auto;transform:translateX(100%);transition:transform .22s;
   box-shadow:-8px 0 30px rgba(0,0,0,.18)}
 .panneau.on{transform:none}
@@ -128,14 +131,15 @@ select,.nb{width:100%;border:1px solid var(--trait);border-radius:8px;padding:9p
   top:0;background:#fff;z-index:2}
 .panneau .ph .cat{font-size:11px;text-transform:uppercase;letter-spacing:.6px;
   color:var(--gris);font-weight:600}
-.panneau .ph h2{margin:5px 0 0;font-size:23px;letter-spacing:-.3px}
+.panneau .ph h2{margin:5px 0 0;font-size:23px;letter-spacing:-.3px;padding-right:44px}
 .panneau .fermer{position:absolute;top:18px;right:20px;background:#f1f3f6;border:0;
   border-radius:8px;width:32px;height:32px;font-size:17px;cursor:pointer;color:var(--gris)}
 .panneau .pc{padding:20px 26px 40px}
-.panneau table{width:100%;border-collapse:collapse;font-size:13.6px;margin:6px 0 20px}
-.panneau td{padding:9px 0;border-bottom:1px solid var(--trait);vertical-align:top}
-.panneau td:first-child{color:var(--gris);width:52%}
-.panneau td:last-child{text-align:right;font-weight:600}
+.panneau table.faits{width:100%;border-collapse:collapse;font-size:13.6px;margin:6px 0 20px}
+.panneau table.faits td{padding:9px 0;border-bottom:1px solid var(--trait);
+  vertical-align:top}
+.panneau table.faits td:first-child{color:var(--gris);width:52%}
+.panneau table.faits td:last-child{text-align:right;font-weight:600}
 .panneau h4{margin:22px 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.7px;
   color:var(--gris)}
 .prov{display:flex;flex-wrap:wrap;gap:6px}
@@ -147,6 +151,7 @@ select,.nb{width:100%;border:1px solid var(--trait);border-radius:8px;padding:9p
 .form input,.form select,.form textarea{width:100%;border:1px solid var(--trait);
   border-radius:8px;padding:10px;font-size:14px;font-family:inherit;background:#fff}
 .form textarea{min-height:74px;resize:vertical}
+.form .duo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .form button{width:100%;margin-top:16px;background:var(--lime);color:var(--encre);border:0;
   border-radius:9px;padding:13px;font-weight:700;font-size:14.5px;cursor:pointer}
 .form .ok{background:#eaffd0;border:1px solid #c9f31d;border-radius:9px;padding:14px;
@@ -154,31 +159,37 @@ select,.nb{width:100%;border:1px solid var(--trait);border-radius:8px;padding:9p
 .err{border-color:#e05252 !important}
 .msg-err{color:#c0392b;font-size:12.5px;margin-top:8px}
 
-/* ---------- comparateur ---------- */
 .cmp-tbl{width:100%;border-collapse:collapse;font-size:13.4px}
 .cmp-tbl th,.cmp-tbl td{border:1px solid var(--trait);padding:10px;text-align:left}
 .cmp-tbl th{background:var(--fond);font-size:12px;color:var(--gris);font-weight:600}
 .cmp-tbl td.h{font-weight:700}
+
+.cats-liste{columns:2;column-gap:26px}
+.cats-liste button{display:block;width:100%;text-align:left;background:none;border:0;
+  border-bottom:1px solid var(--trait);padding:10px 0;font-size:14px;cursor:pointer;
+  break-inside:avoid}
+.cats-liste button:hover{color:#000}
+.cats-liste button span{float:right;color:var(--gris);font-size:12.5px}
 
 footer{border-top:1px solid var(--trait);background:#fff;padding:24px 0 44px;
   font-size:12.5px;color:var(--gris)}
 
 @media(max-width:900px){
   .corps{grid-template-columns:1fr}
-  .filtres{position:static}
+  .filtres{position:static;max-height:none}
   .hero h1{font-size:25px}
   .top nav{display:none}
+  .cats-liste{columns:1}
 }
 </style>
 
 <header>
   <div class="wrap top">
-    <div class="logo">Franchise<b>.</b>Direct<span style="font-weight:400;font-size:12px;
-      color:#8b93a5;margin-left:8px">CA</span></div>
+    <div class="logo">Franchise<b>.</b>Direct<span id="lg-pays"></span></div>
     <nav>
-      <a href="#" data-nav="annuaire">Annuaire</a>
-      <a href="#" data-nav="cats">Categories</a>
-      <a href="#" data-nav="deposer">Inscrire une enseigne</a>
+      <a data-nav="annuaire" id="nv1"></a>
+      <a data-nav="cats" id="nv2"></a>
+      <a data-nav="inscrire" id="nv3"></a>
     </nav>
     <div class="droite">
       <div class="lang">
@@ -199,6 +210,7 @@ footer{border-top:1px solid var(--trait);background:#fff;padding:24px 0 44px;
       <button id="qb"></button>
     </div>
     <div class="chips" id="chips"></div>
+    <div class="marches" id="marches"></div>
   </div>
 </section>
 
@@ -223,126 +235,161 @@ footer{border-top:1px solid var(--trait);background:#fff;padding:24px 0 44px;
 
 <script>
 /* ==========================================================================
-   Annuaire de franchises — moteur de demonstration.
+   Annuaire de franchises — Canada, Etats-Unis, Europe.
 
-   Trois choses valent d'etre dites avant le code :
+   Quatre choses qui expliquent le code :
 
    1. Le produit n'est PAS la liste. La liste amene le candidat ; ce qui se
-      vend, c'est la MISE EN RELATION — le formulaire de demande d'infos au
-      bas de chaque fiche, et la selection comparative. C'est pour ca que la
-      demande d'infos est un bouton primaire sur chaque carte et pas un lien
-      perdu en pied de fiche.
+      vend, c'est la MISE EN RELATION. D'ou le bouton primaire sur chaque
+      carte, et le formulaire d'inscription d'enseigne dans l'entete : un
+      annuaire grandit parce que les franchiseurs y deposent leur fiche, pas
+      parce qu'on recopie celui du voisin.
 
-   2. Les filtres se comptent AVANT de filtrer sur eux-memes. Le nombre
-      affiche a cote de « Ontario » est le nombre de fiches qui resteraient si
-      on cochait Ontario, les autres filtres restant en place. Un compteur
-      calcule sur le resultat final afficherait « 0 » a cote de chaque case
-      non cochee, ce qui est exact et parfaitement inutile.
+   2. Multi-devises. Chaque fiche s'affiche dans SA devise — une enseigne
+      polonaise annonce des zlotys. Mais le FILTRE et le TRI par
+      investissement se font sur une valeur de reference commune en euros,
+      sinon « moins de 250 000 » n'a pas de sens d'un pays a l'autre.
 
-   3. Tout est en memoire, 100 fiches. A 5 000 fiches ce meme code tient
-      encore ; au-dela il faut passer les filtres cote serveur. Le format des
-      donnees ne change pas, seule la source change.
+   3. Les filtres se comptent AVANT de filtrer sur eux-memes. Le nombre a cote
+      de « Allemagne » est le nombre de fiches qui resteraient si on cochait
+      l'Allemagne, les autres filtres restant en place. Un compteur calcule
+      sur le resultat final afficherait « 0 » partout : exact, inutile.
+
+   4. Tout est en memoire, 210 fiches. Le meme code tient a 5 000. Au-dela, on
+      passe les filtres cote serveur — le format des donnees ne change pas,
+      seule la source change.
    ========================================================================== */
 
 var D = null, L = 'fr', PAS = 12, montre = PAS, CMP = [];
-var F = {q:'', cats:[], provs:[], tranches:[], formats:[], fin:false, unites:0};
+var F = {q:'', cats:[], pays:[], regions:[], tranches:[], formats:[], fin:false, unites:0};
 
 var T = {
   fr: {
-    demo: 'Demonstration. Les 100 enseignes ci-dessous sont <b>fictives</b> et les montants sont tires dans les bandes reelles de chaque metier. Aucune marque reelle, aucun chiffre reel. Le moteur, lui, est le vrai.',
-    h1: 'Trouvez la franchise qui correspond a votre budget et a votre region.',
-    hp: 'Comparez les enseignes du Canada par secteur, par investissement et par province, puis demandez de l\'information directement au franchiseur.',
+    pays_h: 'CA / US / EU',
+    nv1: 'Annuaire', nv2: 'Categories', nv3: 'Inscrire une enseigne',
+    demo: 'Demonstration. Les 210 enseignes ci-dessous sont <b>fictives</b> et les montants sont tires dans les bandes reelles de chaque metier. Aucune marque reelle, aucun chiffre reel. Le moteur, lui, est le vrai.',
+    h1: 'Trouvez la franchise qui correspond a votre budget, dans votre pays.',
+    hp: 'Canada, Etats-Unis et Europe. Comparez les enseignes par secteur, par investissement et par pays, puis demandez de l\'information directement au franchiseur.',
     qph: 'Enseigne, secteur, mot-cle...', qb: 'Rechercher',
-    cat: 'Categorie', prov: 'Province', inv: 'Investissement total',
+    m_ens: 'enseignes', m_cat: 'categories', m_pays: 'pays', m_dev: 'devises',
+    cat: 'Categorie', reg: 'Region', pays: 'Pays', inv: 'Investissement total',
     fmt: 'Format d\'exploitation', autres: 'Autres criteres',
-    fin: 'Financement propose', unites: 'Unites au Canada (minimum)',
+    fin: 'Financement propose', unites: 'Unites dans le reseau (minimum)',
     raz: 'Effacer tous les filtres',
     res: 'enseignes', res1: 'enseigne', tri: 'Trier par',
     tris: [['pertinence','Pertinence'],['inv-asc','Investissement croissant'],
            ['inv-desc','Investissement decroissant'],['unites','Nombre d\'unites'],
            ['recent','Franchisage le plus recent'],['az','Nom (A-Z)']],
     de: 'sur', a: 'a', vide: 'Aucune enseigne ne correspond a ces criteres.',
-    vide2: 'Elargissez la fourchette d\'investissement ou retirez une province.',
+    vide2: 'Elargissez la fourchette d\'investissement ou retirez un pays.',
     plus: 'Voir plus d\'enseignes',
     invest: 'Investissement', unitesc: 'Unites', depuis: 'Franchisage depuis',
     info: 'Demander de l\'information', cmp: 'Comparer',
     cmpn: 'enseigne(s) selectionnee(s)', cmpgo: 'Comparer',
     cmpmax: 'Comparaison limitee a 3 enseignes.',
+    ft_org: 'Pays d\'origine', ft_dev: 'Devise annoncee',
     ft_droit: 'Droit d\'entree', ft_liq: 'Liquidites exigees',
     ft_avoir: 'Avoir net exige', ft_red: 'Redevance', ft_pub: 'Fonds de publicite',
     ft_crea: 'Enseigne creee en', ft_fr: 'Franchisage depuis',
-    ft_un: 'Unites au Canada', ft_unf: 'dont franchisees', ft_unc: 'dont succursales',
-    ft_fmt: 'Format', ft_finc: 'Financement propose', ft_form: 'Formation initiale',
-    ft_del: 'Delai d\'ouverture estime', ft_prov: 'Provinces ouvertes au recrutement',
+    ft_un: 'Unites dans le reseau', ft_unf: 'dont franchisees',
+    ft_unc: 'dont succursales', ft_fmt: 'Format', ft_finc: 'Financement propose',
+    ft_form: 'Formation initiale', ft_del: 'Delai d\'ouverture estime',
+    ft_pays: 'Pays ouverts au recrutement',
     sem: 'semaines', oui: 'Oui', non: 'Non',
     fh: 'Demander de l\'information a cette enseigne',
     fi: 'Votre demande est transmise au franchiseur. Il vous repond directement.',
     f_nom: 'Nom complet', f_courriel: 'Courriel', f_tel: 'Telephone',
-    f_prov: 'Province visee', f_budget: 'Capital disponible',
+    f_pays: 'Pays vise', f_budget: 'Capital disponible',
     f_delai: 'Quand souhaitez-vous ouvrir ?', f_msg: 'Votre message (facultatif)',
     f_env: 'Envoyer ma demande',
-    f_ok: 'Demande enregistree. <b>Ceci est une demonstration</b> : rien n\'a ete envoye. Sur le site reel, la fiche part au franchiseur et une copie est conservee dans votre espace.',
+    f_ok: 'Demande enregistree. <b>Ceci est une demonstration</b> : rien n\'a ete envoye. Sur le site reel, la fiche part au franchiseur et une copie reste dans votre espace.',
     f_req: 'Merci de remplir les champs obligatoires.',
     f_mail: 'Cette adresse de courriel ne semble pas valide.',
     d_choisir: 'Choisir', d_3m: 'Dans les 3 mois', d_6m: 'Dans les 6 mois',
     d_12m: 'Dans l\'annee', d_info: 'Je m\'informe seulement',
     cmp_titre: 'Comparaison', cmp_crit: 'Critere',
-    pied: 'Annuaire de franchises &mdash; demonstration technique. Donnees fictives. Ce n\'est ni une offre de franchise, ni un document d\'information sur la franchise au sens de la loi.',
+    cats_t: 'Toutes les categories', cats_i: 'Cliquez une categorie pour filtrer l\'annuaire.',
+    ins_t: 'Inscrire mon enseigne', ins_c: 'Franchiseur',
+    ins_i: 'Un annuaire grandit parce que les enseignes y deposent leur fiche. C\'est ce formulaire qui remplit la base — pas une copie de l\'annuaire du voisin.',
+    ins_ens: 'Nom de l\'enseigne', ins_cat: 'Categorie', ins_pays: 'Pays d\'origine',
+    ins_web: 'Site web', ins_contact: 'Personne a contacter', ins_mail: 'Courriel',
+    ins_dev: 'Devise', ins_bas: 'Investissement, minimum',
+    ins_haut: 'Investissement, maximum', ins_un: 'Unites dans le reseau',
+    ins_msg: 'Presentation de l\'enseigne', ins_env: 'Deposer ma fiche',
+    ins_ok: 'Fiche recue. <b>Ceci est une demonstration</b> : rien n\'a ete enregistre. Sur le site reel, la fiche part en moderation avant publication.',
+    pied: 'Annuaire de franchises &mdash; demonstration technique. Donnees fictives. Ce n\'est ni une offre de franchise, ni un document d\'information precontractuelle au sens de la loi. Les tranches d\'investissement sont classees sur une valeur de reference en euros ; chaque fiche s\'affiche dans sa devise.',
   },
   en: {
-    demo: 'Demonstration. The 100 brands below are <b>fictional</b> and the figures are drawn within the real ranges of each trade. No real brand, no real number. The engine itself is real.',
-    h1: 'Find the franchise that fits your budget and your region.',
-    hp: 'Compare Canadian franchise brands by sector, investment and province, then request information directly from the franchisor.',
+    pays_h: 'CA / US / EU',
+    nv1: 'Directory', nv2: 'Categories', nv3: 'List your brand',
+    demo: 'Demonstration. The 210 brands below are <b>fictional</b> and the figures are drawn within the real ranges of each trade. No real brand, no real number. The engine itself is real.',
+    h1: 'Find the franchise that fits your budget, in your country.',
+    hp: 'Canada, the United States and Europe. Compare brands by sector, investment and country, then request information directly from the franchisor.',
     qph: 'Brand, sector, keyword...', qb: 'Search',
-    cat: 'Category', prov: 'Province', inv: 'Total investment',
+    m_ens: 'brands', m_cat: 'categories', m_pays: 'countries', m_dev: 'currencies',
+    cat: 'Category', reg: 'Region', pays: 'Country', inv: 'Total investment',
     fmt: 'Operating format', autres: 'Other criteria',
-    fin: 'Financing offered', unites: 'Units in Canada (minimum)',
+    fin: 'Financing offered', unites: 'Units in the network (minimum)',
     raz: 'Clear all filters',
     res: 'brands', res1: 'brand', tri: 'Sort by',
     tris: [['pertinence','Relevance'],['inv-asc','Investment, low to high'],
            ['inv-desc','Investment, high to low'],['unites','Number of units'],
            ['recent','Most recently franchising'],['az','Name (A-Z)']],
     de: 'of', a: 'to', vide: 'No brand matches these criteria.',
-    vide2: 'Widen the investment range or remove a province.',
+    vide2: 'Widen the investment range or remove a country.',
     plus: 'Show more brands',
     invest: 'Investment', unitesc: 'Units', depuis: 'Franchising since',
     info: 'Request information', cmp: 'Compare',
     cmpn: 'brand(s) selected', cmpgo: 'Compare',
     cmpmax: 'Comparison is limited to 3 brands.',
+    ft_org: 'Home country', ft_dev: 'Quoted currency',
     ft_droit: 'Franchise fee', ft_liq: 'Liquid capital required',
     ft_avoir: 'Net worth required', ft_red: 'Royalty', ft_pub: 'Advertising fund',
     ft_crea: 'Brand founded in', ft_fr: 'Franchising since',
-    ft_un: 'Units in Canada', ft_unf: 'of which franchised', ft_unc: 'of which corporate',
-    ft_fmt: 'Format', ft_finc: 'Financing offered', ft_form: 'Initial training',
-    ft_del: 'Estimated time to open', ft_prov: 'Provinces open for recruitment',
+    ft_un: 'Units in the network', ft_unf: 'of which franchised',
+    ft_unc: 'of which corporate', ft_fmt: 'Format', ft_finc: 'Financing offered',
+    ft_form: 'Initial training', ft_del: 'Estimated time to open',
+    ft_pays: 'Countries open for recruitment',
     sem: 'weeks', oui: 'Yes', non: 'No',
     fh: 'Request information from this brand',
     fi: 'Your request goes to the franchisor, who answers you directly.',
     f_nom: 'Full name', f_courriel: 'Email', f_tel: 'Phone',
-    f_prov: 'Target province', f_budget: 'Available capital',
+    f_pays: 'Target country', f_budget: 'Available capital',
     f_delai: 'When would you like to open?', f_msg: 'Your message (optional)',
     f_env: 'Send my request',
-    f_ok: 'Request recorded. <b>This is a demonstration</b>: nothing was sent. On the live site the request goes to the franchisor and a copy is kept in your account.',
+    f_ok: 'Request recorded. <b>This is a demonstration</b>: nothing was sent. On the live site the request goes to the franchisor and a copy stays in your account.',
     f_req: 'Please fill in the required fields.',
     f_mail: 'That email address does not look valid.',
     d_choisir: 'Choose', d_3m: 'Within 3 months', d_6m: 'Within 6 months',
     d_12m: 'Within the year', d_info: 'Just gathering information',
     cmp_titre: 'Comparison', cmp_crit: 'Criterion',
-    pied: 'Franchise directory &mdash; technical demonstration. Fictional data. This is neither an offer of a franchise nor a franchise disclosure document within the meaning of the law.',
+    cats_t: 'All categories', cats_i: 'Click a category to filter the directory.',
+    ins_t: 'List my brand', ins_c: 'Franchisor',
+    ins_i: 'A directory grows because brands submit their own listing. This form is what fills the database — not a copy of someone else\'s directory.',
+    ins_ens: 'Brand name', ins_cat: 'Category', ins_pays: 'Home country',
+    ins_web: 'Website', ins_contact: 'Contact person', ins_mail: 'Email',
+    ins_dev: 'Currency', ins_bas: 'Investment, minimum',
+    ins_haut: 'Investment, maximum', ins_un: 'Units in the network',
+    ins_msg: 'About the brand', ins_env: 'Submit my listing',
+    ins_ok: 'Listing received. <b>This is a demonstration</b>: nothing was stored. On the live site it goes to moderation before publication.',
+    pied: 'Franchise directory &mdash; technical demonstration. Fictional data. This is neither an offer of a franchise nor a pre-contractual disclosure document within the meaning of the law. Investment brackets are ranked on a euro reference value; each listing displays in its own currency.',
   }
 };
 function t(k){ return T[L][k]; }
+function loc(){ return L === 'fr' ? 'fr-CA' : 'en-CA'; }
 
-/* Le dollar canadien s'ecrit « 1 200 000 $ » en francais et « $1,200,000 » en
-   anglais. Ce n'est pas un detail cosmetique : un montant mal ecrit sur une
-   page d'investissement fait douter du reste de la page. */
-function argent(v){
-  if (L === 'fr') return v.toLocaleString('fr-CA').replace(/[\u202f\u00a0 ]/g,'\u00a0') + '\u00a0$';
-  return '$' + v.toLocaleString('en-CA');
+/* Intl fait le travail correctement, y compris les espaces insecables et la
+   place du symbole : « 265 000 $ US » en francais, « US$265,000 » en anglais,
+   « 265 000 zl » pour une enseigne polonaise. Ecrire ca a la main, c'est
+   inventer 12 regles typographiques et en rater trois. */
+var FMT = {};
+function argent(v, dev){
+  var k = L + dev;
+  if (!FMT[k]) FMT[k] = new Intl.NumberFormat(loc(),
+    {style:'currency', currency:dev, maximumFractionDigits:0});
+  return FMT[k].format(v);
 }
-function nb(v){
-  return v.toLocaleString(L === 'fr' ? 'fr-CA' : 'en-CA').replace(/[\u202f\u00a0 ]/g,'\u00a0');
-}
+function nb(v){ return v.toLocaleString(loc()); }
 function ech(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
                   .replace(/"/g,'&quot;');
@@ -351,26 +398,23 @@ function lib(liste, cle){
   for (var i=0;i<liste.length;i++) if (liste[i].cle === cle) return liste[i][L];
   return cle;
 }
-/* Accents retires ET casse ramenee : un candidat qui tape « renovation » doit
-   trouver « Renovation », et celui qui tape « cafe » doit trouver « Cafe ». */
 function pliage(s){
   return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 }
 
-/* --- selection d'une fiche sur un jeu de filtres donne --------------------
-   « sauf » permet de compter un filtre sans qu'il se compte lui-meme. */
 function passe(f, sauf){
   if (F.q){
     var mots = pliage(F.q).split(/\s+/).filter(Boolean);
     var champ = pliage(f.nom + ' ' + f.resume.fr + ' ' + f.resume.en + ' ' +
-                       lib(D.categories, f.categorie));
+                       lib(D.categories, f.categorie) + ' ' + lib(D.pays, f.pays_origine));
     for (var i=0;i<mots.length;i++) if (champ.indexOf(mots[i]) < 0) return false;
   }
   if (sauf !== 'cats' && F.cats.length && F.cats.indexOf(f.categorie) < 0) return false;
-  if (sauf !== 'provs' && F.provs.length){
+  if (sauf !== 'regions' && F.regions.length && F.regions.indexOf(f.region) < 0) return false;
+  if (sauf !== 'pays' && F.pays.length){
     var ok = false;
-    for (var j=0;j<F.provs.length;j++)
-      if (f.provinces.indexOf(F.provs[j]) >= 0){ ok = true; break; }
+    for (var j=0;j<F.pays.length;j++)
+      if (f.pays.indexOf(F.pays[j]) >= 0){ ok = true; break; }
     if (!ok) return false;
   }
   if (sauf !== 'tranches' && F.tranches.length &&
@@ -385,14 +429,15 @@ function passe(f, sauf){
 function selection(){
   var out = D.fiches.filter(function(f){ return passe(f, null); });
   var tri = document.getElementById('tri').value;
+  /* Les tris par montant utilisent eur_bas, PAS le montant affiche : comparer
+     6 000 000 HUF a 250 000 CHF sur leur valeur nominale classerait le forint
+     en tete de toutes les listes. */
   var cmpf = {
-    'inv-asc':  function(a,b){ return a.investissement.bas - b.investissement.bas; },
-    'inv-desc': function(a,b){ return b.investissement.bas - a.investissement.bas; },
+    'inv-asc':  function(a,b){ return a.investissement.eur_bas - b.investissement.eur_bas; },
+    'inv-desc': function(a,b){ return b.investissement.eur_bas - a.investissement.eur_bas; },
     'unites':   function(a,b){ return b.unites - a.unites; },
     'recent':   function(a,b){ return b.annee_franchisage - a.annee_franchisage; },
     'az':       function(a,b){ return a.nom.localeCompare(b.nom, L); },
-    /* « Pertinence » sans requete n'a pas de sens : on retombe sur un ordre
-       stable et defendable — les enseignes les plus implantees d'abord. */
     'pertinence': function(a,b){
         if (F.q){
           var qa = pliage(a.nom).indexOf(pliage(F.q)) === 0 ? 1 : 0;
@@ -408,21 +453,17 @@ function selection(){
 
 function compte(sauf, test){
   var n = 0;
-  for (var i=0;i<D.fiches.length;i++){
-    var f = D.fiches[i];
-    if (passe(f, sauf) && test(f)) n++;
-  }
+  for (var i=0;i<D.fiches.length;i++)
+    if (passe(D.fiches[i], sauf) && test(D.fiches[i])) n++;
   return n;
 }
 
-/* --- rendu des filtres ---------------------------------------------------- */
-function coche(groupe, liste, cle, test){
+function coche(groupe, liste, test){
   var h = '';
   for (var i=0;i<liste.length;i++){
     var o = liste[i], n = compte(groupe, test(o.cle));
-    var on = F[groupe].indexOf(o.cle) >= 0;
     h += '<label><input type="checkbox" data-g="' + groupe + '" value="' + o.cle + '"' +
-         (on ? ' checked' : '') + '>' + ech(o[L]) +
+         (F[groupe].indexOf(o.cle) >= 0 ? ' checked' : '') + '>' + ech(o[L]) +
          '<span class="n">' + n + '</span></label>';
   }
   return h;
@@ -431,19 +472,23 @@ function coche(groupe, liste, cle, test){
 function rendFiltres(){
   var h = '';
   h += '<div class="fgrp"><h3>' + t('cat') + '</h3><div class="scroll">' +
-       coche('cats', D.categories, 'categorie',
+       coche('cats', D.categories,
              function(c){ return function(f){ return f.categorie === c; }; }) +
        '</div></div>';
+  h += '<div class="fgrp"><h3>' + t('reg') + '</h3>' +
+       coche('regions', D.regions,
+             function(c){ return function(f){ return f.region === c; }; }) +
+       '</div>';
+  h += '<div class="fgrp"><h3>' + t('pays') + '</h3><div class="scroll">' +
+       coche('pays', D.pays,
+             function(c){ return function(f){ return f.pays.indexOf(c) >= 0; }; }) +
+       '</div></div>';
   h += '<div class="fgrp"><h3>' + t('inv') + '</h3>' +
-       coche('tranches', D.tranches, 'tranche',
+       coche('tranches', D.tranches,
              function(c){ return function(f){ return f.investissement.tranche === c; }; }) +
        '</div>';
-  h += '<div class="fgrp"><h3>' + t('prov') + '</h3><div class="scroll">' +
-       coche('provs', D.provinces, 'province',
-             function(c){ return function(f){ return f.provinces.indexOf(c) >= 0; }; }) +
-       '</div></div>';
   h += '<div class="fgrp"><h3>' + t('fmt') + '</h3>' +
-       coche('formats', D.formats, 'format',
+       coche('formats', D.formats,
              function(c){ return function(f){ return f.format === c; }; }) +
        '</div>';
   h += '<div class="fgrp"><h3>' + t('autres') + '</h3>' +
@@ -458,8 +503,7 @@ function rendFiltres(){
 
   var cases = document.querySelectorAll('#filtres input[type=checkbox][data-g]');
   for (var i=0;i<cases.length;i++) cases[i].onchange = function(){
-    var g = this.dataset.g, v = this.value;
-    var k = F[g].indexOf(v);
+    var g = this.dataset.g, v = this.value, k = F[g].indexOf(v);
     if (this.checked){ if (k < 0) F[g].push(v); } else if (k >= 0) F[g].splice(k, 1);
     montre = PAS; tout();
   };
@@ -468,19 +512,19 @@ function rendFiltres(){
   document.getElementById('funites').onchange = function(){
     F.unites = parseInt(this.value, 10) || 0; montre = PAS; tout(); };
   document.getElementById('raz').onclick = function(){
-    F = {q:'', cats:[], provs:[], tranches:[], formats:[], fin:false, unites:0};
-    document.getElementById('q').value = ''; montre = PAS; tout(); };
+    F = {q:'', cats:[], pays:[], regions:[], tranches:[], formats:[], fin:false, unites:0};
+    document.getElementById('q').value = ''; montre = PAS; rendChrome(); tout(); };
 }
 
-/* --- rendu des resultats -------------------------------------------------- */
 function carte(f){
   return '<article class="fiche" data-id="' + f.id + '">' +
-    '<div class="cat">' + ech(lib(D.categories, f.categorie)) + '</div>' +
+    '<div class="haut"><div class="cat">' + ech(lib(D.categories, f.categorie)) +
+      '</div><div class="org">' + ech(lib(D.pays, f.pays_origine)) + '</div></div>' +
     '<h2>' + ech(f.nom) + '</h2>' +
     '<div class="res">' + ech(f.resume[L]) + '</div>' +
     '<dl>' +
-      '<dt>' + t('invest') + '</dt><dd>' + argent(f.investissement.bas) + ' ' + t('a') +
-        ' ' + argent(f.investissement.haut) + '</dd>' +
+      '<dt>' + t('invest') + '</dt><dd>' + argent(f.investissement.bas, f.devise) +
+        ' ' + t('a') + ' ' + argent(f.investissement.haut, f.devise) + '</dd>' +
       '<dt>' + t('unitesc') + '</dt><dd>' + nb(f.unites) + '</dd>' +
       '<dt>' + t('depuis') + '</dt><dd>' + f.annee_franchisage + '</dd>' +
     '</dl>' +
@@ -512,10 +556,8 @@ function tout(){
   rendBarre();
 }
 
-/* --- comparaison ---------------------------------------------------------- */
 function rendBarre(){
-  var b = document.getElementById('barcmp');
-  b.className = 'barcmp' + (CMP.length ? ' on' : '');
+  document.getElementById('barcmp').className = 'barcmp' + (CMP.length ? ' on' : '');
   var h = '<span class="n">' + CMP.length + '/3 ' + t('cmpn') + '</span>';
   for (var i=0;i<CMP.length;i++){
     var f = fiche(CMP[i]);
@@ -539,41 +581,42 @@ function ouvrirCmp(){
   var h = '<div class="ph"><div class="cat">' + t('cmp_titre') + '</div>' +
           '<h2>' + fs.length + ' ' + t('res') + '</h2>' +
           '<button class="fermer" id="fermer">&times;</button></div><div class="pc">' +
-          '<table class="cmp-tbl"><tr><th>' + t('cmp_crit') + '</th>';
+          '<div style="overflow-x:auto"><table class="cmp-tbl"><tr><th>' +
+          t('cmp_crit') + '</th>';
   for (var i=0;i<fs.length;i++) h += '<th>' + ech(fs[i].nom) + '</th>';
   h += '</tr>';
   h += ligneCmp(t('cat'), fs.map(function(f){ return ech(lib(D.categories, f.categorie)); }));
+  h += ligneCmp(t('ft_org'), fs.map(function(f){ return ech(lib(D.pays, f.pays_origine)); }));
   h += ligneCmp(t('invest'), fs.map(function(f){
-        return argent(f.investissement.bas) + '<br>' + t('a') + ' ' +
-               argent(f.investissement.haut); }));
-  h += ligneCmp(t('ft_droit'), fs.map(function(f){ return argent(f.droit_entree); }));
-  h += ligneCmp(t('ft_liq'), fs.map(function(f){ return argent(f.liquidites); }));
-  h += ligneCmp(t('ft_avoir'), fs.map(function(f){ return argent(f.avoir_net); }));
+        return argent(f.investissement.bas, f.devise) + '<br>' + t('a') + ' ' +
+               argent(f.investissement.haut, f.devise); }));
+  h += ligneCmp(t('ft_droit'), fs.map(function(f){ return argent(f.droit_entree, f.devise); }));
+  h += ligneCmp(t('ft_liq'), fs.map(function(f){ return argent(f.liquidites, f.devise); }));
+  h += ligneCmp(t('ft_avoir'), fs.map(function(f){ return argent(f.avoir_net, f.devise); }));
   h += ligneCmp(t('ft_red'), fs.map(function(f){ return f.redevance + ' %'; }));
   h += ligneCmp(t('ft_pub'), fs.map(function(f){ return f.fonds_pub + ' %'; }));
   h += ligneCmp(t('ft_un'), fs.map(function(f){ return nb(f.unites); }));
   h += ligneCmp(t('ft_fr'), fs.map(function(f){ return f.annee_franchisage; }));
   h += ligneCmp(t('ft_fmt'), fs.map(function(f){ return ech(lib(D.formats, f.format)); }));
   h += ligneCmp(t('ft_finc'), fs.map(function(f){ return f.financement ? t('oui') : t('non'); }));
-  h += ligneCmp(t('ft_del'), fs.map(function(f){
-        return f.delai_semaines + ' ' + t('sem'); }));
-  h += '</table></div>';
+  h += ligneCmp(t('ft_del'), fs.map(function(f){ return f.delai_semaines + ' ' + t('sem'); }));
+  h += '</table></div></div>';
   panneau(h);
 }
 
-/* --- fiche detaillee ------------------------------------------------------ */
 function ouvrirFiche(id){
   var f = fiche(id);
   var h = '<div class="ph"><div class="cat">' + ech(lib(D.categories, f.categorie)) +
     '</div><h2>' + ech(f.nom) + '</h2>' +
     '<button class="fermer" id="fermer">&times;</button></div><div class="pc">' +
     '<p style="margin:0 0 4px;color:#4e5563">' + ech(f.resume[L]) + '</p>' +
-    '<table>' +
-    '<tr><td>' + t('invest') + '</td><td>' + argent(f.investissement.bas) + ' ' +
-      t('a') + ' ' + argent(f.investissement.haut) + '</td></tr>' +
-    '<tr><td>' + t('ft_droit') + '</td><td>' + argent(f.droit_entree) + '</td></tr>' +
-    '<tr><td>' + t('ft_liq') + '</td><td>' + argent(f.liquidites) + '</td></tr>' +
-    '<tr><td>' + t('ft_avoir') + '</td><td>' + argent(f.avoir_net) + '</td></tr>' +
+    '<table class="faits">' +
+    '<tr><td>' + t('ft_org') + '</td><td>' + ech(lib(D.pays, f.pays_origine)) + '</td></tr>' +
+    '<tr><td>' + t('invest') + '</td><td>' + argent(f.investissement.bas, f.devise) +
+      ' ' + t('a') + ' ' + argent(f.investissement.haut, f.devise) + '</td></tr>' +
+    '<tr><td>' + t('ft_droit') + '</td><td>' + argent(f.droit_entree, f.devise) + '</td></tr>' +
+    '<tr><td>' + t('ft_liq') + '</td><td>' + argent(f.liquidites, f.devise) + '</td></tr>' +
+    '<tr><td>' + t('ft_avoir') + '</td><td>' + argent(f.avoir_net, f.devise) + '</td></tr>' +
     '<tr><td>' + t('ft_red') + '</td><td>' + f.redevance + ' %</td></tr>' +
     '<tr><td>' + t('ft_pub') + '</td><td>' + f.fonds_pub + ' %</td></tr>' +
     '<tr><td>' + t('ft_crea') + '</td><td>' + f.annee_creation + '</td></tr>' +
@@ -582,34 +625,29 @@ function ouvrirFiche(id){
     '<tr><td>' + t('ft_unf') + '</td><td>' + nb(f.unites_franchisees) + '</td></tr>' +
     '<tr><td>' + t('ft_unc') + '</td><td>' + nb(f.unites_corpo) + '</td></tr>' +
     '<tr><td>' + t('ft_fmt') + '</td><td>' + ech(lib(D.formats, f.format)) + '</td></tr>' +
-    '<tr><td>' + t('ft_finc') + '</td><td>' + (f.financement ? t('oui') : t('non')) +
-      '</td></tr>' +
-    '<tr><td>' + t('ft_form') + '</td><td>' + f.formation_semaines + ' ' + t('sem') +
-      '</td></tr>' +
-    '<tr><td>' + t('ft_del') + '</td><td>' + f.delai_semaines + ' ' + t('sem') +
-      '</td></tr>' +
-    '</table>' +
-    '<h4>' + t('ft_prov') + '</h4><div class="prov">';
-  for (var i=0;i<f.provinces.length;i++)
-    h += '<span>' + ech(lib(D.provinces, f.provinces[i])) + '</span>';
+    '<tr><td>' + t('ft_finc') + '</td><td>' + (f.financement ? t('oui') : t('non')) + '</td></tr>' +
+    '<tr><td>' + t('ft_form') + '</td><td>' + f.formation_semaines + ' ' + t('sem') + '</td></tr>' +
+    '<tr><td>' + t('ft_del') + '</td><td>' + f.delai_semaines + ' ' + t('sem') + '</td></tr>' +
+    '</table><h4>' + t('ft_pays') + '</h4><div class="prov">';
+  for (var i=0;i<f.pays.length;i++)
+    h += '<span>' + ech(lib(D.pays, f.pays[i])) + '</span>';
   h += '</div>';
 
   var opts = '<option value="">' + t('d_choisir') + '</option>';
-  for (var j=0;j<f.provinces.length;j++)
-    opts += '<option>' + ech(lib(D.provinces, f.provinces[j])) + '</option>';
+  for (var j=0;j<f.pays.length;j++)
+    opts += '<option>' + ech(lib(D.pays, f.pays[j])) + '</option>';
 
   h += '<h4>' + t('fh') + '</h4><div class="form" id="form">' +
     '<p class="i">' + t('fi') + '</p>' +
     '<label>' + t('f_nom') + ' *</label><input id="c_nom">' +
     '<label>' + t('f_courriel') + ' *</label><input id="c_mail" type="email">' +
     '<label>' + t('f_tel') + '</label><input id="c_tel">' +
-    '<label>' + t('f_prov') + ' *</label><select id="c_prov">' + opts + '</select>' +
+    '<label>' + t('f_pays') + ' *</label><select id="c_pays">' + opts + '</select>' +
     '<label>' + t('f_budget') + '</label><select id="c_bud">' +
       '<option value="">' + t('d_choisir') + '</option>';
   for (var k=0;k<D.tranches.length;k++)
     h += '<option>' + ech(D.tranches[k][L]) + '</option>';
-  h += '</select>' +
-    '<label>' + t('f_delai') + '</label><select id="c_del">' +
+  h += '</select><label>' + t('f_delai') + '</label><select id="c_del">' +
       '<option value="">' + t('d_choisir') + '</option><option>' + t('d_3m') +
       '</option><option>' + t('d_6m') + '</option><option>' + t('d_12m') +
       '</option><option>' + t('d_info') + '</option></select>' +
@@ -619,23 +657,105 @@ function ouvrirFiche(id){
   panneau(h);
 
   document.getElementById('c_env').onclick = function(){
-    var nom = document.getElementById('c_nom'), mail = document.getElementById('c_mail'),
-        prov = document.getElementById('c_prov'), res = document.getElementById('c_res');
-    var champs = [nom, mail, prov], manque = false;
-    for (var i=0;i<champs.length;i++){
-      var vide = !champs[i].value.trim();
-      champs[i].className = vide ? 'err' : '';
-      if (vide) manque = true;
+    if (!valide(['c_nom','c_mail','c_pays'], 'c_mail', 'c_res')) return;
+    document.getElementById('c_res').innerHTML = '<div class="ok">' + t('f_ok') + '</div>';
+    this.disabled = true;
+  };
+}
+
+/* Une validation partagee : le formulaire candidat et le formulaire
+   franchiseur echouent de la meme facon, donc ils valident du meme code. */
+function valide(ids, idMail, idRes){
+  var res = document.getElementById(idRes), manque = false;
+  for (var i=0;i<ids.length;i++){
+    var el = document.getElementById(ids[i]);
+    var vide = !el.value.trim();
+    el.className = vide ? 'err' : '';
+    if (vide) manque = true;
+  }
+  if (manque){ res.innerHTML = '<div class="msg-err">' + t('f_req') + '</div>'; return false; }
+  /* Un courriel accepte a « a@b » laisse passer une piste injoignable — et une
+     piste injoignable, sur ce produit, c'est la vente perdue. On exige un
+     point dans le domaine. */
+  var m = document.getElementById(idMail);
+  if (!/^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(m.value.trim())){
+    m.className = 'err';
+    res.innerHTML = '<div class="msg-err">' + t('f_mail') + '</div>';
+    return false;
+  }
+  res.innerHTML = '';
+  return true;
+}
+
+function ouvrirCats(){
+  var n = {};
+  for (var i=0;i<D.fiches.length;i++)
+    n[D.fiches[i].categorie] = (n[D.fiches[i].categorie] || 0) + 1;
+  var h = '<div class="ph"><div class="cat">' + t('nv2') + '</div><h2>' + t('cats_t') +
+    '</h2><button class="fermer" id="fermer">&times;</button></div><div class="pc">' +
+    '<p style="margin:0 0 16px;color:#5d6472;font-size:13.5px">' + t('cats_i') +
+    '</p><div class="cats-liste">';
+  for (var j=0;j<D.categories.length;j++){
+    var c = D.categories[j];
+    h += '<button data-chip="' + c.cle + '">' + ech(c[L]) +
+         '<span>' + (n[c.cle] || 0) + '</span></button>';
+  }
+  h += '</div></div>';
+  panneau(h);
+}
+
+function ouvrirInscription(){
+  var oc = '<option value="">' + t('d_choisir') + '</option>';
+  for (var i=0;i<D.categories.length;i++)
+    oc += '<option>' + ech(D.categories[i][L]) + '</option>';
+  var op = '<option value="">' + t('d_choisir') + '</option>';
+  for (var j=0;j<D.pays.length;j++)
+    op += '<option>' + ech(D.pays[j][L]) + '</option>';
+  var od = '';
+  var vues = {};
+  for (var k=0;k<D.pays.length;k++){
+    if (vues[D.pays[k].devise]) continue;
+    vues[D.pays[k].devise] = 1;
+    od += '<option>' + D.pays[k].devise + '</option>';
+  }
+
+  var h = '<div class="ph"><div class="cat">' + t('ins_c') + '</div><h2>' + t('ins_t') +
+    '</h2><button class="fermer" id="fermer">&times;</button></div><div class="pc">' +
+    '<div class="form" id="form">' +
+    '<p class="i">' + t('ins_i') + '</p>' +
+    '<label>' + t('ins_ens') + ' *</label><input id="i_nom">' +
+    '<label>' + t('ins_cat') + ' *</label><select id="i_cat">' + oc + '</select>' +
+    '<div class="duo"><div><label>' + t('ins_pays') + ' *</label>' +
+      '<select id="i_pays">' + op + '</select></div>' +
+      '<div><label>' + t('ins_dev') + '</label><select id="i_dev">' + od + '</select></div></div>' +
+    '<div class="duo"><div><label>' + t('ins_bas') + '</label>' +
+      '<input id="i_bas" type="number" min="0"></div>' +
+      '<div><label>' + t('ins_haut') + '</label>' +
+      '<input id="i_haut" type="number" min="0"></div></div>' +
+    '<div class="duo"><div><label>' + t('ins_un') + '</label>' +
+      '<input id="i_un" type="number" min="0"></div>' +
+      '<div><label>' + t('ins_web') + '</label><input id="i_web"></div></div>' +
+    '<label>' + t('ins_contact') + ' *</label><input id="i_contact">' +
+    '<label>' + t('ins_mail') + ' *</label><input id="i_mail" type="email">' +
+    '<label>' + t('ins_msg') + '</label><textarea id="i_msg"></textarea>' +
+    '<button id="i_env">' + t('ins_env') + '</button><div id="i_res"></div></div></div>';
+  panneau(h);
+
+  document.getElementById('i_env').onclick = function(){
+    if (!valide(['i_nom','i_cat','i_pays','i_contact','i_mail'], 'i_mail', 'i_res')) return;
+    var bas = parseFloat(document.getElementById('i_bas').value);
+    var haut = parseFloat(document.getElementById('i_haut').value);
+    /* Une fourchette inversee passerait la validation « champ rempli » et
+       casserait le filtre par tranche des sa publication. On l'attrape ici. */
+    if (bas && haut && haut < bas){
+      document.getElementById('i_haut').className = 'err';
+      document.getElementById('i_res').innerHTML =
+        '<div class="msg-err">' + (L === 'fr'
+          ? 'Le maximum ne peut pas etre inferieur au minimum.'
+          : 'The maximum cannot be lower than the minimum.') + '</div>';
+      return;
     }
-    if (manque){ res.innerHTML = '<div class="msg-err">' + t('f_req') + '</div>'; return; }
-    /* Une validation de courriel qui accepte « a@b » laisse passer des pistes
-       injoignables — et une piste injoignable, sur ce produit, c'est la vente
-       perdue. On exige un point dans le domaine. */
-    if (!/^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(mail.value.trim())){
-      mail.className = 'err';
-      res.innerHTML = '<div class="msg-err">' + t('f_mail') + '</div>'; return;
-    }
-    res.innerHTML = '<div class="ok">' + t('f_ok') + '</div>';
+    document.getElementById('i_res').innerHTML = '<div class="ok">' + t('ins_ok') + '</div>';
     this.disabled = true;
   };
 }
@@ -655,9 +775,12 @@ function fermer(){
   document.body.style.overflow = '';
 }
 
-/* --- chrome bilingue ------------------------------------------------------ */
 function rendChrome(){
   document.documentElement.lang = L;
+  document.getElementById('lg-pays').textContent = t('pays_h');
+  document.getElementById('nv1').textContent = t('nv1');
+  document.getElementById('nv2').textContent = t('nv2');
+  document.getElementById('nv3').textContent = t('nv3');
   document.getElementById('bdemo').innerHTML = t('demo');
   document.getElementById('h1').textContent = t('h1');
   document.getElementById('hp').textContent = t('hp');
@@ -665,12 +788,22 @@ function rendChrome(){
   document.getElementById('qb').textContent = t('qb');
   document.getElementById('tri-l').textContent = t('tri');
   document.getElementById('pied').innerHTML = t('pied');
+
+  var devises = {};
+  for (var d=0;d<D.pays.length;d++) devises[D.pays[d].devise] = 1;
+  document.getElementById('marches').innerHTML =
+    '<div class="marche"><b>' + nb(D.fiches.length) + '</b>' + t('m_ens') + '</div>' +
+    '<div class="marche"><b>' + D.categories.length + '</b>' + t('m_cat') + '</div>' +
+    '<div class="marche"><b>' + D.pays.length + '</b>' + t('m_pays') + '</div>' +
+    '<div class="marche"><b>' + Object.keys(devises).length + '</b>' + t('m_dev') + '</div>';
+
   var sel = document.getElementById('tri'), garde = sel.value, h = '';
   var tris = t('tris');
   for (var i=0;i<tris.length;i++)
     h += '<option value="' + tris[i][0] + '">' + tris[i][1] + '</option>';
   sel.innerHTML = h;
   if (garde) sel.value = garde;
+
   var c = '', top = topCats();
   for (var j=0;j<top.length;j++)
     c += '<button data-chip="' + top[j].cle + '"' +
@@ -678,9 +811,9 @@ function rendChrome(){
          ech(top[j][L]) + '</button>';
   document.getElementById('chips').innerHTML = c;
 }
-/* Les pastilles du haut ne sont pas un choix editorial : ce sont les huit
-   categories les plus fournies, dans l'ordre. Elles suivent donc les donnees
-   le jour ou les vraies fiches arrivent. */
+/* Les pastilles ne sont pas un choix editorial : ce sont les huit categories
+   les plus fournies. Elles suivront les donnees le jour ou les vraies fiches
+   arrivent. */
 function topCats(){
   var n = {};
   for (var i=0;i<D.fiches.length;i++)
@@ -690,7 +823,6 @@ function topCats(){
   }).slice(0, 8);
 }
 
-/* --- evenements ----------------------------------------------------------- */
 document.addEventListener('click', function(e){
   var el = e.target;
   if (el.dataset.info){ ouvrirFiche(el.dataset.info); return; }
@@ -701,14 +833,18 @@ document.addEventListener('click', function(e){
     else CMP.push(id);
     tout(); return;
   }
-  if (el.dataset.decmp){
-    CMP.splice(CMP.indexOf(el.dataset.decmp), 1); tout(); return;
-  }
+  if (el.dataset.decmp){ CMP.splice(CMP.indexOf(el.dataset.decmp), 1); tout(); return; }
   if (el.id === 'cmpgo'){ ouvrirCmp(); return; }
   if (el.dataset.chip){
     var c = el.dataset.chip, i = F.cats.indexOf(c);
     if (i >= 0) F.cats.splice(i, 1); else F.cats.push(c);
-    montre = PAS; rendChrome(); tout(); return;
+    montre = PAS; fermer(); rendChrome(); tout(); return;
+  }
+  if (el.dataset.nav){
+    if (el.dataset.nav === 'cats') ouvrirCats();
+    else if (el.dataset.nav === 'inscrire') ouvrirInscription();
+    else { fermer(); window.scrollTo({top:0, behavior:'smooth'}); }
+    return;
   }
   if (el.dataset.l && el.dataset.l !== L){
     L = el.dataset.l;

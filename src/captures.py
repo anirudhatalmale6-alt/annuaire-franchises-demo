@@ -35,16 +35,23 @@ try:
 
         pg.screenshot(path=os.path.join(ICI, 'fr-1-accueil.png'))
 
-        pg.locator('#filtres input[value="concession-auto"]').check()
-        pg.locator('#filtres input[value="restauration-rapide"]').check()
+        pg.locator('#filtres input[value="duty-free"]').check()
         pg.wait_for_timeout(250)
-        pg.mouse.wheel(0, 430)
+        pg.mouse.wheel(0, 470)
         pg.wait_for_timeout(250)
         pg.screenshot(path=os.path.join(ICI, 'fr-2-filtres.png'))
+        pg.click('#raz'); pg.wait_for_timeout(200)
 
-        pg.locator('#filtres input[value="concession-auto"]').uncheck()
-        pg.locator('#filtres input[value="restauration-rapide"]').uncheck()
-        pg.wait_for_timeout(200)
+        # Une vue qui montre plusieurs devises cote a cote : c'est le point
+        # qu'un annuaire multi-pays doit prouver a l'oeil.
+        pg.locator('#filtres input[value="eu-est"]').check()
+        pg.locator('#filtres input[value="eu-nord"]').check()
+        pg.wait_for_timeout(250)
+        pg.mouse.wheel(0, 470)
+        pg.wait_for_timeout(250)
+        pg.screenshot(path=os.path.join(ICI, 'fr-8-devises.png'))
+        pg.click('#raz'); pg.wait_for_timeout(200)
+        pg.mouse.wheel(0, -900); pg.wait_for_timeout(200)
         pg.locator('.fiche .cta').first.click()
         pg.wait_for_timeout(400)
         pg.screenshot(path=os.path.join(ICI, 'fr-3-fiche.png'))
@@ -68,6 +75,12 @@ try:
         pg.screenshot(path=os.path.join(ICI, 'fr-6-anglais.png'))
 
         pg.click('.lang button[data-l="fr"]')
+        pg.wait_for_timeout(250)
+        pg.click('a[data-nav="inscrire"]')
+        pg.wait_for_timeout(400)
+        pg.screenshot(path=os.path.join(ICI, 'fr-9-inscription.png'))
+        pg.keyboard.press('Escape')
+        pg.wait_for_timeout(250)
         pg.set_viewport_size({'width': 390, 'height': 780})
         pg.wait_for_timeout(400)
         pg.mouse.wheel(0, 520)
