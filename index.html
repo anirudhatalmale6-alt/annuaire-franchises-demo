@@ -1,0 +1,736 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Annuaire des franchises au Canada &middot; demonstration</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --lime:#c9f31d; --encre:#101319; --gris:#5d6472; --trait:#e3e6ec;
+  --fond:#f6f7f9; --blanc:#fff; --ombre:0 1px 2px rgba(16,19,25,.06);
+}
+html,body{margin:0}
+body{font:15px/1.55 system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  background:var(--fond);color:var(--encre);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+
+/* ---------- entete ---------- */
+header{background:var(--encre);color:#fff;position:sticky;top:0;z-index:30}
+.top{display:flex;align-items:center;gap:18px;padding:14px 20px}
+.logo{font-weight:800;font-size:19px;letter-spacing:-.2px}
+.logo b{color:var(--lime)}
+.top nav{display:flex;gap:18px;font-size:13.5px;color:#aeb5c2;margin-left:8px}
+.top nav a:hover{color:#fff}
+.droite{margin-left:auto;display:flex;align-items:center;gap:12px}
+.lang{display:flex;border:1px solid #2c313d;border-radius:7px;overflow:hidden}
+.lang button{background:none;border:0;color:#aeb5c2;padding:6px 11px;font-size:12.5px;
+  cursor:pointer}
+.lang button.on{background:var(--lime);color:var(--encre);font-weight:700}
+
+/* ---------- banniere demo ---------- */
+.demo{background:#fff6d6;border-bottom:1px solid #f0e2a8;color:#6b5a12;
+  font-size:12.5px;padding:9px 0}
+.demo b{color:#4a3d06}
+
+/* ---------- hero ---------- */
+.hero{background:var(--encre);color:#fff;padding:34px 0 40px}
+.hero h1{margin:0 0 8px;font-size:31px;line-height:1.2;letter-spacing:-.5px;max-width:720px}
+.hero p{margin:0 0 20px;color:#aeb5c2;font-size:15px;max-width:640px}
+.rech{display:flex;gap:10px;max-width:720px}
+.rech input{flex:1;border:0;border-radius:9px;padding:13px 15px;font-size:15px;
+  font-family:inherit}
+.rech input:focus{outline:2px solid var(--lime)}
+.rech button{background:var(--lime);color:var(--encre);border:0;border-radius:9px;
+  padding:0 22px;font-weight:700;font-size:14.5px;cursor:pointer}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chips button{background:#1b202a;border:1px solid #2c313d;color:#c9cfdb;border-radius:20px;
+  padding:6px 13px;font-size:12.5px;cursor:pointer}
+.chips button:hover{border-color:var(--lime);color:#fff}
+.chips button.on{background:var(--lime);border-color:var(--lime);color:var(--encre);
+  font-weight:600}
+
+/* ---------- corps ---------- */
+.corps{display:grid;grid-template-columns:264px 1fr;gap:26px;padding:26px 0 60px;
+  align-items:start}
+.filtres{background:var(--blanc);border:1px solid var(--trait);border-radius:12px;
+  padding:4px 16px 16px;position:sticky;top:74px;box-shadow:var(--ombre)}
+.fgrp{padding:14px 0;border-bottom:1px solid var(--trait)}
+.fgrp:last-child{border-bottom:0}
+.fgrp h3{margin:0 0 9px;font-size:11.5px;text-transform:uppercase;letter-spacing:.7px;
+  color:var(--gris);font-weight:700}
+.fgrp label{display:flex;align-items:center;gap:8px;font-size:13.5px;padding:3px 0;
+  cursor:pointer}
+.fgrp label input{accent-color:var(--lime);width:15px;height:15px;flex:0 0 15px}
+.fgrp label span.n{margin-left:auto;color:#9aa1ae;font-size:12px}
+select,.nb{width:100%;border:1px solid var(--trait);border-radius:8px;padding:9px 10px;
+  font-size:13.5px;font-family:inherit;background:#fff;color:var(--encre)}
+.raz{width:100%;background:#fff;border:1px solid var(--trait);border-radius:8px;
+  padding:9px;font-size:13px;cursor:pointer;color:var(--gris);margin-top:14px}
+.raz:hover{border-color:var(--encre);color:var(--encre)}
+.scroll{max-height:212px;overflow:auto;margin-right:-6px;padding-right:6px}
+
+.entete-res{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.entete-res .cpt{font-size:14px;color:var(--gris)}
+.entete-res .cpt b{color:var(--encre);font-size:16px}
+.entete-res .tri{margin-left:auto;display:flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--gris)}
+.entete-res .tri select{width:auto}
+
+.grille{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.fiche{background:var(--blanc);border:1px solid var(--trait);border-radius:12px;
+  padding:16px 17px 14px;display:flex;flex-direction:column;gap:9px;
+  box-shadow:var(--ombre);transition:border-color .15s,transform .15s}
+.fiche:hover{border-color:#b9c0cd;transform:translateY(-1px)}
+.fiche .cat{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--gris);
+  font-weight:600}
+.fiche h2{margin:0;font-size:17px;letter-spacing:-.2px}
+.fiche .res{font-size:13.2px;color:#4e5563;flex:1}
+.fiche dl{margin:0;display:grid;grid-template-columns:auto auto;gap:4px 10px;
+  font-size:12.8px;border-top:1px solid var(--trait);padding-top:10px}
+.fiche dt{color:var(--gris)}
+.fiche dd{margin:0;text-align:right;font-weight:600}
+.fiche .bas{display:flex;align-items:center;gap:8px;margin-top:4px}
+.fiche .bas .cta{background:var(--encre);color:#fff;border:0;border-radius:8px;
+  padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer;flex:1}
+.fiche .bas .cta:hover{background:#000}
+.fiche .bas .cmp{border:1px solid var(--trait);background:#fff;border-radius:8px;
+  padding:9px 11px;font-size:12.5px;cursor:pointer;color:var(--gris)}
+.fiche .bas .cmp.on{border-color:var(--lime);background:#f7ffdd;color:var(--encre);
+  font-weight:600}
+.vide{background:#fff;border:1px dashed var(--trait);border-radius:12px;padding:50px 20px;
+  text-align:center;color:var(--gris)}
+.plus{display:block;margin:22px auto 0;background:#fff;border:1px solid var(--trait);
+  border-radius:9px;padding:11px 26px;font-size:14px;cursor:pointer}
+.plus:hover{border-color:var(--encre)}
+
+/* ---------- barre de comparaison ---------- */
+.barcmp{position:fixed;left:0;right:0;bottom:0;background:var(--encre);color:#fff;
+  z-index:40;transform:translateY(110%);transition:transform .18s}
+.barcmp.on{transform:none}
+.barcmp .in{display:flex;align-items:center;gap:12px;padding:12px 20px;flex-wrap:wrap}
+.barcmp .n{font-size:13.5px;color:#aeb5c2}
+.barcmp .pastille{background:#1b202a;border:1px solid #2c313d;border-radius:20px;
+  padding:5px 11px;font-size:12.5px}
+.barcmp .pastille b{cursor:pointer;color:#8b93a5;margin-left:6px}
+.barcmp .go{margin-left:auto;background:var(--lime);color:var(--encre);border:0;
+  border-radius:8px;padding:10px 18px;font-weight:700;font-size:13.5px;cursor:pointer}
+
+/* ---------- panneau ---------- */
+.voile{position:fixed;inset:0;background:rgba(16,19,25,.55);z-index:50;display:none}
+.voile.on{display:block}
+.panneau{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:#fff;
+  z-index:51;overflow:auto;transform:translateX(100%);transition:transform .22s;
+  box-shadow:-8px 0 30px rgba(0,0,0,.18)}
+.panneau.on{transform:none}
+.panneau .ph{padding:22px 26px 16px;border-bottom:1px solid var(--trait);position:sticky;
+  top:0;background:#fff;z-index:2}
+.panneau .ph .cat{font-size:11px;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--gris);font-weight:600}
+.panneau .ph h2{margin:5px 0 0;font-size:23px;letter-spacing:-.3px}
+.panneau .fermer{position:absolute;top:18px;right:20px;background:#f1f3f6;border:0;
+  border-radius:8px;width:32px;height:32px;font-size:17px;cursor:pointer;color:var(--gris)}
+.panneau .pc{padding:20px 26px 40px}
+.panneau table{width:100%;border-collapse:collapse;font-size:13.6px;margin:6px 0 20px}
+.panneau td{padding:9px 0;border-bottom:1px solid var(--trait);vertical-align:top}
+.panneau td:first-child{color:var(--gris);width:52%}
+.panneau td:last-child{text-align:right;font-weight:600}
+.panneau h4{margin:22px 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.7px;
+  color:var(--gris)}
+.prov{display:flex;flex-wrap:wrap;gap:6px}
+.prov span{background:#f1f3f6;border-radius:6px;padding:4px 9px;font-size:12px}
+.form{background:var(--fond);border:1px solid var(--trait);border-radius:12px;
+  padding:18px;margin-top:8px}
+.form p.i{margin:0 0 14px;font-size:13px;color:var(--gris)}
+.form label{display:block;font-size:12.5px;color:var(--gris);margin:10px 0 4px}
+.form input,.form select,.form textarea{width:100%;border:1px solid var(--trait);
+  border-radius:8px;padding:10px;font-size:14px;font-family:inherit;background:#fff}
+.form textarea{min-height:74px;resize:vertical}
+.form button{width:100%;margin-top:16px;background:var(--lime);color:var(--encre);border:0;
+  border-radius:9px;padding:13px;font-weight:700;font-size:14.5px;cursor:pointer}
+.form .ok{background:#eaffd0;border:1px solid #c9f31d;border-radius:9px;padding:14px;
+  font-size:13.5px;margin-top:14px}
+.err{border-color:#e05252 !important}
+.msg-err{color:#c0392b;font-size:12.5px;margin-top:8px}
+
+/* ---------- comparateur ---------- */
+.cmp-tbl{width:100%;border-collapse:collapse;font-size:13.4px}
+.cmp-tbl th,.cmp-tbl td{border:1px solid var(--trait);padding:10px;text-align:left}
+.cmp-tbl th{background:var(--fond);font-size:12px;color:var(--gris);font-weight:600}
+.cmp-tbl td.h{font-weight:700}
+
+footer{border-top:1px solid var(--trait);background:#fff;padding:24px 0 44px;
+  font-size:12.5px;color:var(--gris)}
+
+@media(max-width:900px){
+  .corps{grid-template-columns:1fr}
+  .filtres{position:static}
+  .hero h1{font-size:25px}
+  .top nav{display:none}
+}
+</style>
+
+<header>
+  <div class="wrap top">
+    <div class="logo">Franchise<b>.</b>Direct<span style="font-weight:400;font-size:12px;
+      color:#8b93a5;margin-left:8px">CA</span></div>
+    <nav>
+      <a href="#" data-nav="annuaire">Annuaire</a>
+      <a href="#" data-nav="cats">Categories</a>
+      <a href="#" data-nav="deposer">Inscrire une enseigne</a>
+    </nav>
+    <div class="droite">
+      <div class="lang">
+        <button data-l="fr" class="on">FR</button><button data-l="en">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="demo"><div class="wrap" id="bdemo"></div></div>
+
+<section class="hero">
+  <div class="wrap">
+    <h1 id="h1"></h1>
+    <p id="hp"></p>
+    <div class="rech">
+      <input id="q" autocomplete="off">
+      <button id="qb"></button>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+</section>
+
+<div class="wrap corps">
+  <aside class="filtres" id="filtres"></aside>
+  <main>
+    <div class="entete-res">
+      <div class="cpt" id="cpt"></div>
+      <div class="tri"><span id="tri-l"></span><select id="tri"></select></div>
+    </div>
+    <div class="grille" id="grille"></div>
+    <button class="plus" id="plus" hidden></button>
+  </main>
+</div>
+
+<div class="barcmp" id="barcmp"><div class="in wrap" id="barcmp-in"></div></div>
+
+<div class="voile" id="voile"></div>
+<div class="panneau" id="panneau"></div>
+
+<footer><div class="wrap" id="pied"></div></footer>
+
+<script>
+/* ==========================================================================
+   Annuaire de franchises — moteur de demonstration.
+
+   Trois choses valent d'etre dites avant le code :
+
+   1. Le produit n'est PAS la liste. La liste amene le candidat ; ce qui se
+      vend, c'est la MISE EN RELATION — le formulaire de demande d'infos au
+      bas de chaque fiche, et la selection comparative. C'est pour ca que la
+      demande d'infos est un bouton primaire sur chaque carte et pas un lien
+      perdu en pied de fiche.
+
+   2. Les filtres se comptent AVANT de filtrer sur eux-memes. Le nombre
+      affiche a cote de « Ontario » est le nombre de fiches qui resteraient si
+      on cochait Ontario, les autres filtres restant en place. Un compteur
+      calcule sur le resultat final afficherait « 0 » a cote de chaque case
+      non cochee, ce qui est exact et parfaitement inutile.
+
+   3. Tout est en memoire, 100 fiches. A 5 000 fiches ce meme code tient
+      encore ; au-dela il faut passer les filtres cote serveur. Le format des
+      donnees ne change pas, seule la source change.
+   ========================================================================== */
+
+var D = null, L = 'fr', PAS = 12, montre = PAS, CMP = [];
+var F = {q:'', cats:[], provs:[], tranches:[], formats:[], fin:false, unites:0};
+
+var T = {
+  fr: {
+    demo: 'Demonstration. Les 100 enseignes ci-dessous sont <b>fictives</b> et les montants sont tires dans les bandes reelles de chaque metier. Aucune marque reelle, aucun chiffre reel. Le moteur, lui, est le vrai.',
+    h1: 'Trouvez la franchise qui correspond a votre budget et a votre region.',
+    hp: 'Comparez les enseignes du Canada par secteur, par investissement et par province, puis demandez de l\'information directement au franchiseur.',
+    qph: 'Enseigne, secteur, mot-cle...', qb: 'Rechercher',
+    cat: 'Categorie', prov: 'Province', inv: 'Investissement total',
+    fmt: 'Format d\'exploitation', autres: 'Autres criteres',
+    fin: 'Financement propose', unites: 'Unites au Canada (minimum)',
+    raz: 'Effacer tous les filtres',
+    res: 'enseignes', res1: 'enseigne', tri: 'Trier par',
+    tris: [['pertinence','Pertinence'],['inv-asc','Investissement croissant'],
+           ['inv-desc','Investissement decroissant'],['unites','Nombre d\'unites'],
+           ['recent','Franchisage le plus recent'],['az','Nom (A-Z)']],
+    de: 'sur', a: 'a', vide: 'Aucune enseigne ne correspond a ces criteres.',
+    vide2: 'Elargissez la fourchette d\'investissement ou retirez une province.',
+    plus: 'Voir plus d\'enseignes',
+    invest: 'Investissement', unitesc: 'Unites', depuis: 'Franchisage depuis',
+    info: 'Demander de l\'information', cmp: 'Comparer',
+    cmpn: 'enseigne(s) selectionnee(s)', cmpgo: 'Comparer',
+    cmpmax: 'Comparaison limitee a 3 enseignes.',
+    ft_droit: 'Droit d\'entree', ft_liq: 'Liquidites exigees',
+    ft_avoir: 'Avoir net exige', ft_red: 'Redevance', ft_pub: 'Fonds de publicite',
+    ft_crea: 'Enseigne creee en', ft_fr: 'Franchisage depuis',
+    ft_un: 'Unites au Canada', ft_unf: 'dont franchisees', ft_unc: 'dont succursales',
+    ft_fmt: 'Format', ft_finc: 'Financement propose', ft_form: 'Formation initiale',
+    ft_del: 'Delai d\'ouverture estime', ft_prov: 'Provinces ouvertes au recrutement',
+    sem: 'semaines', oui: 'Oui', non: 'Non',
+    fh: 'Demander de l\'information a cette enseigne',
+    fi: 'Votre demande est transmise au franchiseur. Il vous repond directement.',
+    f_nom: 'Nom complet', f_courriel: 'Courriel', f_tel: 'Telephone',
+    f_prov: 'Province visee', f_budget: 'Capital disponible',
+    f_delai: 'Quand souhaitez-vous ouvrir ?', f_msg: 'Votre message (facultatif)',
+    f_env: 'Envoyer ma demande',
+    f_ok: 'Demande enregistree. <b>Ceci est une demonstration</b> : rien n\'a ete envoye. Sur le site reel, la fiche part au franchiseur et une copie est conservee dans votre espace.',
+    f_req: 'Merci de remplir les champs obligatoires.',
+    f_mail: 'Cette adresse de courriel ne semble pas valide.',
+    d_choisir: 'Choisir', d_3m: 'Dans les 3 mois', d_6m: 'Dans les 6 mois',
+    d_12m: 'Dans l\'annee', d_info: 'Je m\'informe seulement',
+    cmp_titre: 'Comparaison', cmp_crit: 'Critere',
+    pied: 'Annuaire de franchises &mdash; demonstration technique. Donnees fictives. Ce n\'est ni une offre de franchise, ni un document d\'information sur la franchise au sens de la loi.',
+  },
+  en: {
+    demo: 'Demonstration. The 100 brands below are <b>fictional</b> and the figures are drawn within the real ranges of each trade. No real brand, no real number. The engine itself is real.',
+    h1: 'Find the franchise that fits your budget and your region.',
+    hp: 'Compare Canadian franchise brands by sector, investment and province, then request information directly from the franchisor.',
+    qph: 'Brand, sector, keyword...', qb: 'Search',
+    cat: 'Category', prov: 'Province', inv: 'Total investment',
+    fmt: 'Operating format', autres: 'Other criteria',
+    fin: 'Financing offered', unites: 'Units in Canada (minimum)',
+    raz: 'Clear all filters',
+    res: 'brands', res1: 'brand', tri: 'Sort by',
+    tris: [['pertinence','Relevance'],['inv-asc','Investment, low to high'],
+           ['inv-desc','Investment, high to low'],['unites','Number of units'],
+           ['recent','Most recently franchising'],['az','Name (A-Z)']],
+    de: 'of', a: 'to', vide: 'No brand matches these criteria.',
+    vide2: 'Widen the investment range or remove a province.',
+    plus: 'Show more brands',
+    invest: 'Investment', unitesc: 'Units', depuis: 'Franchising since',
+    info: 'Request information', cmp: 'Compare',
+    cmpn: 'brand(s) selected', cmpgo: 'Compare',
+    cmpmax: 'Comparison is limited to 3 brands.',
+    ft_droit: 'Franchise fee', ft_liq: 'Liquid capital required',
+    ft_avoir: 'Net worth required', ft_red: 'Royalty', ft_pub: 'Advertising fund',
+    ft_crea: 'Brand founded in', ft_fr: 'Franchising since',
+    ft_un: 'Units in Canada', ft_unf: 'of which franchised', ft_unc: 'of which corporate',
+    ft_fmt: 'Format', ft_finc: 'Financing offered', ft_form: 'Initial training',
+    ft_del: 'Estimated time to open', ft_prov: 'Provinces open for recruitment',
+    sem: 'weeks', oui: 'Yes', non: 'No',
+    fh: 'Request information from this brand',
+    fi: 'Your request goes to the franchisor, who answers you directly.',
+    f_nom: 'Full name', f_courriel: 'Email', f_tel: 'Phone',
+    f_prov: 'Target province', f_budget: 'Available capital',
+    f_delai: 'When would you like to open?', f_msg: 'Your message (optional)',
+    f_env: 'Send my request',
+    f_ok: 'Request recorded. <b>This is a demonstration</b>: nothing was sent. On the live site the request goes to the franchisor and a copy is kept in your account.',
+    f_req: 'Please fill in the required fields.',
+    f_mail: 'That email address does not look valid.',
+    d_choisir: 'Choose', d_3m: 'Within 3 months', d_6m: 'Within 6 months',
+    d_12m: 'Within the year', d_info: 'Just gathering information',
+    cmp_titre: 'Comparison', cmp_crit: 'Criterion',
+    pied: 'Franchise directory &mdash; technical demonstration. Fictional data. This is neither an offer of a franchise nor a franchise disclosure document within the meaning of the law.',
+  }
+};
+function t(k){ return T[L][k]; }
+
+/* Le dollar canadien s'ecrit « 1 200 000 $ » en francais et « $1,200,000 » en
+   anglais. Ce n'est pas un detail cosmetique : un montant mal ecrit sur une
+   page d'investissement fait douter du reste de la page. */
+function argent(v){
+  if (L === 'fr') return v.toLocaleString('fr-CA').replace(/[\u202f\u00a0 ]/g,'\u00a0') + '\u00a0$';
+  return '$' + v.toLocaleString('en-CA');
+}
+function nb(v){
+  return v.toLocaleString(L === 'fr' ? 'fr-CA' : 'en-CA').replace(/[\u202f\u00a0 ]/g,'\u00a0');
+}
+function ech(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+                  .replace(/"/g,'&quot;');
+}
+function lib(liste, cle){
+  for (var i=0;i<liste.length;i++) if (liste[i].cle === cle) return liste[i][L];
+  return cle;
+}
+/* Accents retires ET casse ramenee : un candidat qui tape « renovation » doit
+   trouver « Renovation », et celui qui tape « cafe » doit trouver « Cafe ». */
+function pliage(s){
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+}
+
+/* --- selection d'une fiche sur un jeu de filtres donne --------------------
+   « sauf » permet de compter un filtre sans qu'il se compte lui-meme. */
+function passe(f, sauf){
+  if (F.q){
+    var mots = pliage(F.q).split(/\s+/).filter(Boolean);
+    var champ = pliage(f.nom + ' ' + f.resume.fr + ' ' + f.resume.en + ' ' +
+                       lib(D.categories, f.categorie));
+    for (var i=0;i<mots.length;i++) if (champ.indexOf(mots[i]) < 0) return false;
+  }
+  if (sauf !== 'cats' && F.cats.length && F.cats.indexOf(f.categorie) < 0) return false;
+  if (sauf !== 'provs' && F.provs.length){
+    var ok = false;
+    for (var j=0;j<F.provs.length;j++)
+      if (f.provinces.indexOf(F.provs[j]) >= 0){ ok = true; break; }
+    if (!ok) return false;
+  }
+  if (sauf !== 'tranches' && F.tranches.length &&
+      F.tranches.indexOf(f.investissement.tranche) < 0) return false;
+  if (sauf !== 'formats' && F.formats.length &&
+      F.formats.indexOf(f.format) < 0) return false;
+  if (F.fin && !f.financement) return false;
+  if (F.unites && f.unites < F.unites) return false;
+  return true;
+}
+
+function selection(){
+  var out = D.fiches.filter(function(f){ return passe(f, null); });
+  var tri = document.getElementById('tri').value;
+  var cmpf = {
+    'inv-asc':  function(a,b){ return a.investissement.bas - b.investissement.bas; },
+    'inv-desc': function(a,b){ return b.investissement.bas - a.investissement.bas; },
+    'unites':   function(a,b){ return b.unites - a.unites; },
+    'recent':   function(a,b){ return b.annee_franchisage - a.annee_franchisage; },
+    'az':       function(a,b){ return a.nom.localeCompare(b.nom, L); },
+    /* « Pertinence » sans requete n'a pas de sens : on retombe sur un ordre
+       stable et defendable — les enseignes les plus implantees d'abord. */
+    'pertinence': function(a,b){
+        if (F.q){
+          var qa = pliage(a.nom).indexOf(pliage(F.q)) === 0 ? 1 : 0;
+          var qb = pliage(b.nom).indexOf(pliage(F.q)) === 0 ? 1 : 0;
+          if (qa !== qb) return qb - qa;
+        }
+        return b.unites - a.unites;
+      }
+  }[tri];
+  out.sort(cmpf);
+  return out;
+}
+
+function compte(sauf, test){
+  var n = 0;
+  for (var i=0;i<D.fiches.length;i++){
+    var f = D.fiches[i];
+    if (passe(f, sauf) && test(f)) n++;
+  }
+  return n;
+}
+
+/* --- rendu des filtres ---------------------------------------------------- */
+function coche(groupe, liste, cle, test){
+  var h = '';
+  for (var i=0;i<liste.length;i++){
+    var o = liste[i], n = compte(groupe, test(o.cle));
+    var on = F[groupe].indexOf(o.cle) >= 0;
+    h += '<label><input type="checkbox" data-g="' + groupe + '" value="' + o.cle + '"' +
+         (on ? ' checked' : '') + '>' + ech(o[L]) +
+         '<span class="n">' + n + '</span></label>';
+  }
+  return h;
+}
+
+function rendFiltres(){
+  var h = '';
+  h += '<div class="fgrp"><h3>' + t('cat') + '</h3><div class="scroll">' +
+       coche('cats', D.categories, 'categorie',
+             function(c){ return function(f){ return f.categorie === c; }; }) +
+       '</div></div>';
+  h += '<div class="fgrp"><h3>' + t('inv') + '</h3>' +
+       coche('tranches', D.tranches, 'tranche',
+             function(c){ return function(f){ return f.investissement.tranche === c; }; }) +
+       '</div>';
+  h += '<div class="fgrp"><h3>' + t('prov') + '</h3><div class="scroll">' +
+       coche('provs', D.provinces, 'province',
+             function(c){ return function(f){ return f.provinces.indexOf(c) >= 0; }; }) +
+       '</div></div>';
+  h += '<div class="fgrp"><h3>' + t('fmt') + '</h3>' +
+       coche('formats', D.formats, 'format',
+             function(c){ return function(f){ return f.format === c; }; }) +
+       '</div>';
+  h += '<div class="fgrp"><h3>' + t('autres') + '</h3>' +
+       '<label><input type="checkbox" id="ffin"' + (F.fin ? ' checked' : '') + '>' +
+       t('fin') + '</label>' +
+       '<div style="margin-top:10px"><div style="font-size:12.5px;color:#5d6472;' +
+       'margin-bottom:5px">' + t('unites') + '</div>' +
+       '<input class="nb" type="number" min="0" step="10" id="funites" value="' +
+       (F.unites || '') + '"></div>' +
+       '<button class="raz" id="raz">' + t('raz') + '</button></div>';
+  document.getElementById('filtres').innerHTML = h;
+
+  var cases = document.querySelectorAll('#filtres input[type=checkbox][data-g]');
+  for (var i=0;i<cases.length;i++) cases[i].onchange = function(){
+    var g = this.dataset.g, v = this.value;
+    var k = F[g].indexOf(v);
+    if (this.checked){ if (k < 0) F[g].push(v); } else if (k >= 0) F[g].splice(k, 1);
+    montre = PAS; tout();
+  };
+  document.getElementById('ffin').onchange = function(){
+    F.fin = this.checked; montre = PAS; tout(); };
+  document.getElementById('funites').onchange = function(){
+    F.unites = parseInt(this.value, 10) || 0; montre = PAS; tout(); };
+  document.getElementById('raz').onclick = function(){
+    F = {q:'', cats:[], provs:[], tranches:[], formats:[], fin:false, unites:0};
+    document.getElementById('q').value = ''; montre = PAS; tout(); };
+}
+
+/* --- rendu des resultats -------------------------------------------------- */
+function carte(f){
+  return '<article class="fiche" data-id="' + f.id + '">' +
+    '<div class="cat">' + ech(lib(D.categories, f.categorie)) + '</div>' +
+    '<h2>' + ech(f.nom) + '</h2>' +
+    '<div class="res">' + ech(f.resume[L]) + '</div>' +
+    '<dl>' +
+      '<dt>' + t('invest') + '</dt><dd>' + argent(f.investissement.bas) + ' ' + t('a') +
+        ' ' + argent(f.investissement.haut) + '</dd>' +
+      '<dt>' + t('unitesc') + '</dt><dd>' + nb(f.unites) + '</dd>' +
+      '<dt>' + t('depuis') + '</dt><dd>' + f.annee_franchisage + '</dd>' +
+    '</dl>' +
+    '<div class="bas">' +
+      '<button class="cta" data-info="' + f.id + '">' + t('info') + '</button>' +
+      '<button class="cmp' + (CMP.indexOf(f.id) >= 0 ? ' on' : '') +
+        '" data-cmp="' + f.id + '">' + t('cmp') + '</button>' +
+    '</div></article>';
+}
+
+function tout(){
+  rendFiltres();
+  var res = selection();
+  document.getElementById('cpt').innerHTML =
+    '<b>' + nb(res.length) + '</b> ' + (res.length === 1 ? t('res1') : t('res')) +
+    ' ' + t('de') + ' ' + nb(D.fiches.length);
+  var g = document.getElementById('grille');
+  if (!res.length){
+    g.innerHTML = '<div class="vide" style="grid-column:1/-1"><b>' + t('vide') +
+                  '</b><br>' + t('vide2') + '</div>';
+  } else {
+    var h = '';
+    for (var i=0;i<Math.min(montre, res.length);i++) h += carte(res[i]);
+    g.innerHTML = h;
+  }
+  var p = document.getElementById('plus');
+  p.hidden = res.length <= montre;
+  p.textContent = t('plus') + ' (' + Math.max(0, res.length - montre) + ')';
+  rendBarre();
+}
+
+/* --- comparaison ---------------------------------------------------------- */
+function rendBarre(){
+  var b = document.getElementById('barcmp');
+  b.className = 'barcmp' + (CMP.length ? ' on' : '');
+  var h = '<span class="n">' + CMP.length + '/3 ' + t('cmpn') + '</span>';
+  for (var i=0;i<CMP.length;i++){
+    var f = fiche(CMP[i]);
+    h += '<span class="pastille">' + ech(f.nom) +
+         '<b data-decmp="' + f.id + '">&times;</b></span>';
+  }
+  h += '<button class="go" id="cmpgo">' + t('cmpgo') + '</button>';
+  document.getElementById('barcmp-in').innerHTML = h;
+}
+function fiche(id){
+  for (var i=0;i<D.fiches.length;i++) if (D.fiches[i].id === id) return D.fiches[i];
+  return null;
+}
+function ligneCmp(nom, vals){
+  var h = '<tr><td class="h">' + nom + '</td>';
+  for (var i=0;i<vals.length;i++) h += '<td>' + vals[i] + '</td>';
+  return h + '</tr>';
+}
+function ouvrirCmp(){
+  var fs = CMP.map(fiche);
+  var h = '<div class="ph"><div class="cat">' + t('cmp_titre') + '</div>' +
+          '<h2>' + fs.length + ' ' + t('res') + '</h2>' +
+          '<button class="fermer" id="fermer">&times;</button></div><div class="pc">' +
+          '<table class="cmp-tbl"><tr><th>' + t('cmp_crit') + '</th>';
+  for (var i=0;i<fs.length;i++) h += '<th>' + ech(fs[i].nom) + '</th>';
+  h += '</tr>';
+  h += ligneCmp(t('cat'), fs.map(function(f){ return ech(lib(D.categories, f.categorie)); }));
+  h += ligneCmp(t('invest'), fs.map(function(f){
+        return argent(f.investissement.bas) + '<br>' + t('a') + ' ' +
+               argent(f.investissement.haut); }));
+  h += ligneCmp(t('ft_droit'), fs.map(function(f){ return argent(f.droit_entree); }));
+  h += ligneCmp(t('ft_liq'), fs.map(function(f){ return argent(f.liquidites); }));
+  h += ligneCmp(t('ft_avoir'), fs.map(function(f){ return argent(f.avoir_net); }));
+  h += ligneCmp(t('ft_red'), fs.map(function(f){ return f.redevance + ' %'; }));
+  h += ligneCmp(t('ft_pub'), fs.map(function(f){ return f.fonds_pub + ' %'; }));
+  h += ligneCmp(t('ft_un'), fs.map(function(f){ return nb(f.unites); }));
+  h += ligneCmp(t('ft_fr'), fs.map(function(f){ return f.annee_franchisage; }));
+  h += ligneCmp(t('ft_fmt'), fs.map(function(f){ return ech(lib(D.formats, f.format)); }));
+  h += ligneCmp(t('ft_finc'), fs.map(function(f){ return f.financement ? t('oui') : t('non'); }));
+  h += ligneCmp(t('ft_del'), fs.map(function(f){
+        return f.delai_semaines + ' ' + t('sem'); }));
+  h += '</table></div>';
+  panneau(h);
+}
+
+/* --- fiche detaillee ------------------------------------------------------ */
+function ouvrirFiche(id){
+  var f = fiche(id);
+  var h = '<div class="ph"><div class="cat">' + ech(lib(D.categories, f.categorie)) +
+    '</div><h2>' + ech(f.nom) + '</h2>' +
+    '<button class="fermer" id="fermer">&times;</button></div><div class="pc">' +
+    '<p style="margin:0 0 4px;color:#4e5563">' + ech(f.resume[L]) + '</p>' +
+    '<table>' +
+    '<tr><td>' + t('invest') + '</td><td>' + argent(f.investissement.bas) + ' ' +
+      t('a') + ' ' + argent(f.investissement.haut) + '</td></tr>' +
+    '<tr><td>' + t('ft_droit') + '</td><td>' + argent(f.droit_entree) + '</td></tr>' +
+    '<tr><td>' + t('ft_liq') + '</td><td>' + argent(f.liquidites) + '</td></tr>' +
+    '<tr><td>' + t('ft_avoir') + '</td><td>' + argent(f.avoir_net) + '</td></tr>' +
+    '<tr><td>' + t('ft_red') + '</td><td>' + f.redevance + ' %</td></tr>' +
+    '<tr><td>' + t('ft_pub') + '</td><td>' + f.fonds_pub + ' %</td></tr>' +
+    '<tr><td>' + t('ft_crea') + '</td><td>' + f.annee_creation + '</td></tr>' +
+    '<tr><td>' + t('ft_fr') + '</td><td>' + f.annee_franchisage + '</td></tr>' +
+    '<tr><td>' + t('ft_un') + '</td><td>' + nb(f.unites) + '</td></tr>' +
+    '<tr><td>' + t('ft_unf') + '</td><td>' + nb(f.unites_franchisees) + '</td></tr>' +
+    '<tr><td>' + t('ft_unc') + '</td><td>' + nb(f.unites_corpo) + '</td></tr>' +
+    '<tr><td>' + t('ft_fmt') + '</td><td>' + ech(lib(D.formats, f.format)) + '</td></tr>' +
+    '<tr><td>' + t('ft_finc') + '</td><td>' + (f.financement ? t('oui') : t('non')) +
+      '</td></tr>' +
+    '<tr><td>' + t('ft_form') + '</td><td>' + f.formation_semaines + ' ' + t('sem') +
+      '</td></tr>' +
+    '<tr><td>' + t('ft_del') + '</td><td>' + f.delai_semaines + ' ' + t('sem') +
+      '</td></tr>' +
+    '</table>' +
+    '<h4>' + t('ft_prov') + '</h4><div class="prov">';
+  for (var i=0;i<f.provinces.length;i++)
+    h += '<span>' + ech(lib(D.provinces, f.provinces[i])) + '</span>';
+  h += '</div>';
+
+  var opts = '<option value="">' + t('d_choisir') + '</option>';
+  for (var j=0;j<f.provinces.length;j++)
+    opts += '<option>' + ech(lib(D.provinces, f.provinces[j])) + '</option>';
+
+  h += '<h4>' + t('fh') + '</h4><div class="form" id="form">' +
+    '<p class="i">' + t('fi') + '</p>' +
+    '<label>' + t('f_nom') + ' *</label><input id="c_nom">' +
+    '<label>' + t('f_courriel') + ' *</label><input id="c_mail" type="email">' +
+    '<label>' + t('f_tel') + '</label><input id="c_tel">' +
+    '<label>' + t('f_prov') + ' *</label><select id="c_prov">' + opts + '</select>' +
+    '<label>' + t('f_budget') + '</label><select id="c_bud">' +
+      '<option value="">' + t('d_choisir') + '</option>';
+  for (var k=0;k<D.tranches.length;k++)
+    h += '<option>' + ech(D.tranches[k][L]) + '</option>';
+  h += '</select>' +
+    '<label>' + t('f_delai') + '</label><select id="c_del">' +
+      '<option value="">' + t('d_choisir') + '</option><option>' + t('d_3m') +
+      '</option><option>' + t('d_6m') + '</option><option>' + t('d_12m') +
+      '</option><option>' + t('d_info') + '</option></select>' +
+    '<label>' + t('f_msg') + '</label><textarea id="c_msg"></textarea>' +
+    '<button id="c_env">' + t('f_env') + '</button>' +
+    '<div id="c_res"></div></div></div>';
+  panneau(h);
+
+  document.getElementById('c_env').onclick = function(){
+    var nom = document.getElementById('c_nom'), mail = document.getElementById('c_mail'),
+        prov = document.getElementById('c_prov'), res = document.getElementById('c_res');
+    var champs = [nom, mail, prov], manque = false;
+    for (var i=0;i<champs.length;i++){
+      var vide = !champs[i].value.trim();
+      champs[i].className = vide ? 'err' : '';
+      if (vide) manque = true;
+    }
+    if (manque){ res.innerHTML = '<div class="msg-err">' + t('f_req') + '</div>'; return; }
+    /* Une validation de courriel qui accepte « a@b » laisse passer des pistes
+       injoignables — et une piste injoignable, sur ce produit, c'est la vente
+       perdue. On exige un point dans le domaine. */
+    if (!/^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(mail.value.trim())){
+      mail.className = 'err';
+      res.innerHTML = '<div class="msg-err">' + t('f_mail') + '</div>'; return;
+    }
+    res.innerHTML = '<div class="ok">' + t('f_ok') + '</div>';
+    this.disabled = true;
+  };
+}
+
+function panneau(h){
+  var p = document.getElementById('panneau');
+  p.innerHTML = h;
+  p.classList.add('on');
+  document.getElementById('voile').classList.add('on');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('fermer').onclick = fermer;
+  p.scrollTop = 0;
+}
+function fermer(){
+  document.getElementById('panneau').classList.remove('on');
+  document.getElementById('voile').classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+/* --- chrome bilingue ------------------------------------------------------ */
+function rendChrome(){
+  document.documentElement.lang = L;
+  document.getElementById('bdemo').innerHTML = t('demo');
+  document.getElementById('h1').textContent = t('h1');
+  document.getElementById('hp').textContent = t('hp');
+  document.getElementById('q').placeholder = t('qph');
+  document.getElementById('qb').textContent = t('qb');
+  document.getElementById('tri-l').textContent = t('tri');
+  document.getElementById('pied').innerHTML = t('pied');
+  var sel = document.getElementById('tri'), garde = sel.value, h = '';
+  var tris = t('tris');
+  for (var i=0;i<tris.length;i++)
+    h += '<option value="' + tris[i][0] + '">' + tris[i][1] + '</option>';
+  sel.innerHTML = h;
+  if (garde) sel.value = garde;
+  var c = '', top = topCats();
+  for (var j=0;j<top.length;j++)
+    c += '<button data-chip="' + top[j].cle + '"' +
+         (F.cats.indexOf(top[j].cle) >= 0 ? ' class="on"' : '') + '>' +
+         ech(top[j][L]) + '</button>';
+  document.getElementById('chips').innerHTML = c;
+}
+/* Les pastilles du haut ne sont pas un choix editorial : ce sont les huit
+   categories les plus fournies, dans l'ordre. Elles suivent donc les donnees
+   le jour ou les vraies fiches arrivent. */
+function topCats(){
+  var n = {};
+  for (var i=0;i<D.fiches.length;i++)
+    n[D.fiches[i].categorie] = (n[D.fiches[i].categorie] || 0) + 1;
+  return D.categories.slice().sort(function(a,b){
+    return (n[b.cle]||0) - (n[a.cle]||0) || a[L].localeCompare(b[L], L);
+  }).slice(0, 8);
+}
+
+/* --- evenements ----------------------------------------------------------- */
+document.addEventListener('click', function(e){
+  var el = e.target;
+  if (el.dataset.info){ ouvrirFiche(el.dataset.info); return; }
+  if (el.dataset.cmp){
+    var id = el.dataset.cmp, k = CMP.indexOf(id);
+    if (k >= 0) CMP.splice(k, 1);
+    else if (CMP.length >= 3){ alert(t('cmpmax')); return; }
+    else CMP.push(id);
+    tout(); return;
+  }
+  if (el.dataset.decmp){
+    CMP.splice(CMP.indexOf(el.dataset.decmp), 1); tout(); return;
+  }
+  if (el.id === 'cmpgo'){ ouvrirCmp(); return; }
+  if (el.dataset.chip){
+    var c = el.dataset.chip, i = F.cats.indexOf(c);
+    if (i >= 0) F.cats.splice(i, 1); else F.cats.push(c);
+    montre = PAS; rendChrome(); tout(); return;
+  }
+  if (el.dataset.l && el.dataset.l !== L){
+    L = el.dataset.l;
+    var b = document.querySelectorAll('.lang button');
+    for (var m=0;m<b.length;m++) b[m].className = b[m].dataset.l === L ? 'on' : '';
+    fermer(); rendChrome(); tout(); return;
+  }
+  if (el.id === 'voile') fermer();
+});
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') fermer(); });
+
+function chercher(){
+  F.q = document.getElementById('q').value.trim(); montre = PAS; tout();
+}
+document.getElementById('qb').onclick = chercher;
+document.getElementById('q').addEventListener('input', chercher);
+document.getElementById('tri').onchange = function(){ tout(); };
+document.getElementById('plus').onclick = function(){ montre += PAS; tout(); };
+
+fetch('catalogue.json').then(function(r){ return r.json(); }).then(function(d){
+  D = d;
+  rendChrome();
+  tout();
+});
+</script>
