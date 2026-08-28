@@ -220,6 +220,9 @@ footer{border-top:1px solid var(--trait);background:#fff;padding:24px 0 44px;
     <nav>
       <a href="index.html" id="nv1"></a>
       <a id="nv4" class="on"></a>
+      <!-- Le site de prestige est un SITE SEPARE : lien absolu, pas relatif.
+           C'est l'adresse a changer le jour du nom de domaine. -->
+      <a id="nv5" href="https://anirudhatalmale6-alt.github.io/maisons-de-prestige/"></a>
     </nav>
     <div class="droite">
       <div class="lang">
@@ -273,6 +276,7 @@ footer{border-top:1px solid var(--trait);background:#fff;padding:24px 0 44px;
 var T = {
  fr: {
   nv1: 'Annuaire generaliste', nv4: 'Hotellerie',
+  nv5: 'Maisons de prestige',
   titre: 'Les franchises hotelieres',
   sous: 'Une section a part, parce qu\'un hotel ne se compare pas a un commerce\
  sur les memes colonnes : on y investit a la cle, on paie deux redevances, et\
@@ -349,6 +353,7 @@ var T = {
  },
  en: {
   nv1: 'General directory', nv4: 'Hospitality',
+  nv5: 'Prestige houses',
   titre: 'Hotel franchises',
   sous: 'A separate section, because a hotel cannot be compared to a shop on the\
  same columns: you invest per key, you pay two fees, and the agreement is not\
@@ -795,6 +800,7 @@ function chips(){
 function tout(){
   document.getElementById('nv1').textContent = t('nv1');
   document.getElementById('nv4').textContent = t('nv4');
+  document.getElementById('nv5').textContent = t('nv5');
   document.getElementById('h-titre').textContent = t('titre');
   document.getElementById('h-sous').textContent = t('sous');
   document.getElementById('q').placeholder = t('rech');

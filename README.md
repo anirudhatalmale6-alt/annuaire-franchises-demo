@@ -21,7 +21,7 @@ d'information qui part chez le franchiseur. C'est pour ca que « Demander de
 l'information » est le bouton principal de chaque carte, et pas un lien en bas
 de page.
 
-Les 200 enseignes de l'annuaire generaliste et les 29 marques hotelieres
+Les 200 enseignes de l'annuaire generaliste et les 26 marques hotelieres
 sont **fictives**, et c'est volontaire :
 
 - Je ne recopie pas la base de franchisedirect.com. C'est leur actif, et une
@@ -108,16 +108,26 @@ commerce sur les memes colonnes.
 Melangee aux autres metiers, elle faussait aussi le filtre par tranche : un
 projet a plusieurs millions ecrase les fourchettes de tous les autres.
 
+**Le luxe n'est plus ici non plus.** Le meme raisonnement, un cran plus
+loin : au-dessus du haut de gamme on ne signe presque jamais une franchise,
+on confie l'exploitation au groupe, et la redevance cede la place a un
+couple honoraires de base (% du chiffre d'affaires total) / honoraires
+d'incitation (% du resultat brut d'exploitation). Les maisons de prestige
+ont donc leur propre site — theme noir, page d'accueil a part :
+<https://anirudhatalmale6-alt.github.io/maisons-de-prestige/>. Les trois
+marques de luxe qui figuraient dans cette liste y sont parties : une marque
+a deux endroits, c'est un total qui se contredit.
+
 | | |
 |---|---|
-| marques | 29 |
+| marques | 26 |
 | groupes | 10, chacun portant 2 a 4 marques |
-| segments | 7 : economique, milieu de gamme, milieu de gamme superieur, haut de gamme, luxe, appart-hotel, lifestyle |
+| segments | 6 : economique, milieu de gamme, milieu de gamme superieur, haut de gamme, appart-hotel, lifestyle |
 | types de contrat | 4 |
 | filtres | segment, type de contrat, investissement par cle, **taille de mon hotel**, conversion, region, pays |
 | tris | pertinence, investissement/cle croissant et decroissant, taille du reseau, A-Z |
 | langues | francais et anglais |
-| controles | **60, tous verts** (`python3 tests-hotels.py`) |
+| controles | **62, tous verts** (`python3 tests-hotels.py`) |
 
 Quatre choix qui portent tout le reste :
 
@@ -125,7 +135,7 @@ Quatre choix qui portent tout le reste :
    l'investissement a la cle multiplie par la taille acceptee. Tire a part,
    il finit toujours par contredire le prix a la cle affiche juste au-dessus
    — et c'est le chiffre sur lequel un investisseur decide. Un controle
-   verifie l'egalite sur les 29 fiches.
+   verifie l'egalite sur les 26 fiches.
 
 2. **Le filtre « taille de mon hotel » demande l'appartenance, pas un
    minimum.** La question reelle est « mon hotel fait 120 chambres, quelles
@@ -135,7 +145,8 @@ Quatre choix qui portent tout le reste :
 3. **Un contrat de gestion n'existe pas sur un economique de 70 chambres**
    — les honoraires ne paieraient pas l'equipe du groupe. Le tableau des
    contrats possibles est fixe par segment, et deux controles l'imposent :
-   aucune enseigne economique en gestion, toute enseigne de luxe en gestion.
+   aucune enseigne sous le milieu de gamme superieur en gestion, et la
+   gestion existe bien, sur une partie seulement du catalogue.
 
 4. **Un groupe ne porte jamais deux marques dans le meme segment.** C'est
    ainsi que sont batis les portefeuilles de marques hotelieres ; deux

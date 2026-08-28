@@ -18,6 +18,15 @@ Melangee a l'annuaire generaliste, l'hotellerie faussait aussi le filtre par
 tranche d'investissement : un projet a plusieurs millions ecrase toutes les
 fourchettes des autres metiers.
 
+LE LUXE N'EST PLUS ICI NON PLUS. Le meme raisonnement, un cran plus loin :
+au-dessus du haut de gamme on ne signe presque jamais une franchise, on
+confie l'exploitation au groupe, et la remuneration cesse d'etre une
+redevance pour devenir un couple honoraires de base / honoraires
+d'incitation, assis sur deux assiettes differentes. Cette colonne-la n'existe
+pas ici. Les maisons de prestige ont donc leur propre site (../prestige/), et
+les trois marques de luxe qui figuraient dans cette liste y sont parties :
+une marque a deux endroits, c'est un total qui se contredit.
+
 Tout ce qui est ici est FICTIF. Aucun groupe reel, aucune marque reelle,
 aucun chiffre reel. Les montants sont tires dans les bandes du segment vise,
 avec une graine fixe : deux reconstructions donnent le meme fichier.
@@ -57,8 +66,6 @@ SEGMENTS = [
      130000, 190000, 100, 220, (4.5, 5.5), (2.5, 4.0), (400, 600), (50000, 75000)),
     ('haut', 'Haut de gamme', 'Upscale',
      180000, 280000, 120, 300, (5.0, 6.0), (3.0, 4.5), (450, 650), (55000, 85000)),
-    ('luxe', 'Luxe', 'Luxury',
-     300000, 700000, 60, 180, (5.0, 7.0), (3.0, 5.0), (600, 900), (75000, 120000)),
     ('appart', 'Appart-hotel et sejour prolonge', 'Extended stay',
      85000, 160000, 80, 180, (4.0, 5.5), (2.5, 4.0), (350, 550), (45000, 70000)),
     ('lifestyle', 'Lifestyle et boutique', 'Lifestyle and boutique',
@@ -98,7 +105,6 @@ CONTRATS_PAR_SEGMENT = {
     'milieu': ['franchise', 'location', 'developpement'],
     'milieu-sup': ['franchise', 'gestion', 'location', 'developpement'],
     'haut': ['franchise', 'gestion', 'location'],
-    'luxe': ['gestion', 'franchise'],
     'appart': ['franchise', 'gestion', 'location', 'developpement'],
     'lifestyle': ['franchise', 'gestion'],
 }
@@ -117,7 +123,7 @@ DUREE = {
 # rarement sans reconstruction lourde, l'economique presque toujours.
 CONVERSION = {
     'economique': .90, 'milieu': .85, 'milieu-sup': .75, 'haut': .55,
-    'luxe': .25, 'appart': .60, 'lifestyle': .70,
+    'appart': .60, 'lifestyle': .70,
 }
 
 SOUTIENS = [
@@ -166,9 +172,6 @@ GROUPES = {
          'Stopover hotels, no restaurant, automated front desk'),
     ]),
     'Cassiopee Hospitality': ('CH', [
-        ('Cassiopee Collection', 'luxe',
-         'Palaces et maisons de caractere, service complet',
-         'Palaces and character properties, full service'),
         ('Cassiopee Maison', 'lifestyle',
          'Petites unites de caractere, bar et table d\'auteur',
          'Small character properties with signature bar and kitchen'),
@@ -199,9 +202,6 @@ GROUPES = {
          'Restored townhouses, under one hundred keys'),
     ]),
     'Rivermark Hotels': ('US', [
-        ('Rivermark Signature', 'luxe',
-         'Adresses de prestige, service de conciergerie',
-         'Prestige addresses with concierge service'),
         ('Rivermark Hotels', 'haut',
          'Hotels d\'affaires, etage de reunion et lounge',
          'Business hotels with meeting floor and lounge'),
@@ -224,9 +224,6 @@ GROUPES = {
         ('Kestrel Court', 'milieu',
          'Hotels de peripherie urbaine, seminaires et mariages',
          'Edge-of-town hotels for conferences and weddings'),
-        ('Kestrel Manor', 'luxe',
-         'Manoirs et domaines, restauration gastronomique',
-         'Manor houses and estates with fine dining'),
         ('Kestrel Halt', 'economique',
          'Hotels d\'aeroport et de zone d\'activite',
          'Airport and business-park hotels'),

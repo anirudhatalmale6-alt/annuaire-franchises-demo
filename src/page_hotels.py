@@ -19,6 +19,12 @@ from chemins import dossier_pages   # noqa: E402
 DEMO = dossier_pages(ICI)
 
 
+# Le site des maisons de prestige est un site separe : on ne peut pas
+# l'atteindre par un chemin relatif. Adresse a changer le jour du nom
+# de domaine definitif.
+URL_PRESTIGE = 'https://anirudhatalmale6-alt.github.io/maisons-de-prestige/'
+
+
 def css_commune():
     src = open(os.path.join(DEMO, 'index.html'), encoding='utf-8').read()
     m = re.search(r'<style>\n(.*?)\n</style>', src, re.S)
@@ -65,6 +71,9 @@ __CSS_HOTELS__
     <nav>
       <a href="index.html" id="nv1"></a>
       <a id="nv4" class="on"></a>
+      <!-- Le site de prestige est un SITE SEPARE : lien absolu, pas relatif.
+           C'est l'adresse a changer le jour du nom de domaine. -->
+      <a id="nv5" href="__URL_PRESTIGE__"></a>
     </nav>
     <div class="droite">
       <div class="lang">
@@ -118,6 +127,7 @@ __CSS_HOTELS__
 var T = {
  fr: {
   nv1: 'Annuaire generaliste', nv4: 'Hotellerie',
+  nv5: 'Maisons de prestige',
   titre: 'Les franchises hotelieres',
   sous: 'Une section a part, parce qu\\'un hotel ne se compare pas a un commerce\\
  sur les memes colonnes : on y investit a la cle, on paie deux redevances, et\\
@@ -194,6 +204,7 @@ var T = {
  },
  en: {
   nv1: 'General directory', nv4: 'Hospitality',
+  nv5: 'Prestige houses',
   titre: 'Hotel franchises',
   sous: 'A separate section, because a hotel cannot be compared to a shop on the\\
  same columns: you invest per key, you pay two fees, and the agreement is not\\
@@ -640,6 +651,7 @@ function chips(){
 function tout(){
   document.getElementById('nv1').textContent = t('nv1');
   document.getElementById('nv4').textContent = t('nv4');
+  document.getElementById('nv5').textContent = t('nv5');
   document.getElementById('h-titre').textContent = t('titre');
   document.getElementById('h-sous').textContent = t('sous');
   document.getElementById('q').placeholder = t('rech');
@@ -727,7 +739,8 @@ function demarrer(){
 
 def main():
     html = (PAGE.replace('__CSS_COMMUNE__', css_commune())
-                .replace('__CSS_HOTELS__', CSS_HOTELS))
+                .replace('__CSS_HOTELS__', CSS_HOTELS)
+                .replace('__URL_PRESTIGE__', URL_PRESTIGE))
     chemin = os.path.join(DEMO, 'hotellerie.html')
     with open(chemin, 'w', encoding='utf-8') as f:
         f.write(html)

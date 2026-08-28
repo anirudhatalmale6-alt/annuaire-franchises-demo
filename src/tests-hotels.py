@@ -117,8 +117,24 @@ t('aucun type de contrat impossible pour son segment', not illegaux,
 t('aucune enseigne economique ne propose un contrat de gestion',
   not [f['id'] for f in FI
        if f['segment'] == 'economique' and 'gestion' in f['contrats']])
-t('le luxe se gere : toute enseigne de luxe propose la gestion',
-  all('gestion' in f['contrats'] for f in FI if f['segment'] == 'luxe'))
+# Le segment « luxe » est parti sur le site de prestige. Le controle porte
+# donc sur son ABSENCE — laisser en place l'ancienne regle (« toute enseigne
+# de luxe propose la gestion ») aurait donne un vert permanent : une
+# assertion sur un ensemble vide est vraie et ne verifie rien.
+t('le segment « luxe » a bien quitte cette section',
+  'luxe' not in {s[0] for s in SEGMENTS}
+  and not [f['id'] for f in FI if f['segment'] == 'luxe'])
+# Le contrat de gestion n'apparait qu'a partir du milieu de gamme
+# SUPERIEUR. Au-dessous, les honoraires ne paieraient pas l'equipe du
+# groupe. Ce n'est PAS « toutes les enseignes haut de gamme le proposent » :
+# le haut de gamme se franchise aussi, et souvent.
+bas = [f['id'] for f in FI
+       if f['segment'] in ('economique', 'milieu') and 'gestion' in f['contrats']]
+t('aucune enseigne sous le milieu de gamme superieur ne propose la gestion',
+  not bas, bas)
+avec = [f['id'] for f in FI if 'gestion' in f['contrats']]
+t('la gestion existe, sur une partie seulement du catalogue (%d/%d)'
+  % (len(avec), len(FI)), 0 < len(avec) < len(FI), len(avec))
 
 hors_duree = [(f['id'], f['contrats'][0], f['duree_contrat']) for f in FI
               if not (DUREE[f['contrats'][0]][0] <= f['duree_contrat']
@@ -242,12 +258,13 @@ def main():
         # Le compteur a cote d'une case doit PREDIRE le resultat du clic.
         # Calcule sur le resultat final il afficherait 0 partout : exact, et
         # parfaitement inutile.
-        case = pg.locator('.fgrp input[data-g="segs"][data-v="luxe"]')
+        case = pg.locator('.fgrp input[data-g="segs"][data-v="haut"]')
         annonce = int(case.locator('xpath=../span[@class="n"]').inner_text())
         case.check()
         pg.wait_for_timeout(250)
-        attendu = sum(1 for f in FI if f['segment'] == 'luxe')
-        t('le compteur du segment « luxe » predisait le resultat (%d)' % attendu,
+        attendu = sum(1 for f in FI if f['segment'] == 'haut')
+        t('le compteur du segment « haut de gamme » predisait le resultat (%d)'
+          % attendu,
           annonce == attendu == total(),
           'annonce %d, obtenu %d, attendu %d' % (annonce, total(), attendu))
         t('filtrer sur un segment rend un sous-ensemble STRICT',
