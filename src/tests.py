@@ -26,7 +26,8 @@ import sys
 import time
 
 ICI = os.path.dirname(os.path.abspath(__file__))
-DEMO = os.path.join(ICI, 'demo')
+from chemins import dossier_pages   # noqa: E402
+DEMO = dossier_pages(ICI)
 
 ok = [0]
 ko = [0]
@@ -57,8 +58,8 @@ with open(os.path.join(DEMO, 'catalogue.json'), encoding='utf-8') as f:
     D = json.load(f)
 FI = D['fiches']
 
-t('210 fiches', len(FI) == 210, str(len(FI)))
-t('21 categories', len(D['categories']) == 21, str(len(D['categories'])))
+t('200 fiches', len(FI) == 200, str(len(FI)))
+t('20 categories', len(D['categories']) == 20, str(len(D['categories'])))
 t('22 pays', len(D['pays']) == 22, str(len(D['pays'])))
 t('5 regions', len(D['regions']) == 5, str(len(D['regions'])))
 t('les 3 marches demandes sont couverts',
@@ -229,26 +230,29 @@ try:
             pg.wait_for_timeout(200)
 
         t('aucune erreur JavaScript au chargement', not erreurs, str(erreurs[:2]))
-        t('le compteur annonce 210 enseignes', total() == 210, str(total()))
+        t('le compteur annonce 200 enseignes', total() == 200, str(total()))
         t('la premiere page en montre 12', cartes() == 12, str(cartes()))
         t('la banniere de demonstration est visible',
           'fictives' in pg.locator('.demo').inner_text().lower())
         bandeau = pg.locator('#marches').inner_text()
-        t('le bandeau annonce 22 pays et 21 categories',
-          '22' in bandeau and '21' in bandeau, bandeau.replace('\n', ' '))
+        # Le bandeau est mis en page en colonnes : le nombre et son libelle
+        # sont separes par un saut de ligne, pas par une espace.
+        plat = ' '.join(bandeau.split())
+        t('le bandeau annonce 22 pays et 20 categories',
+          '22 pays' in plat and '20 categories' in plat, plat)
 
         # --- categorie
         pg.locator('#filtres input[value="duty-free"]').check()
         pg.wait_for_timeout(200)
         t('filtre duty free : 10 enseignes', total() == 10, str(total()))
         decoche_tout()
-        t('effacer les filtres restitue les 210', total() == 210, str(total()))
+        t('effacer les filtres restitue les 200', total() == 200, str(total()))
 
         # --- region
         pg.locator('#filtres input[value="na"]').check()
         pg.wait_for_timeout(200)
         na = total()
-        t('filtre region Amerique du Nord : sous-ensemble strict', 0 < na < 210, str(na))
+        t('filtre region Amerique du Nord : sous-ensemble strict', 0 < na < 200, str(na))
         decoche_tout()
 
         # --- pays, et le compteur doit PREDIRE un sous-ensemble strict
@@ -257,7 +261,7 @@ try:
         pg.locator('#filtres input[value="DE"]').check()
         pg.wait_for_timeout(200)
         t('le compteur du pays Allemagne predit un sous-ensemble strict (%d)' % n_de,
-          total() == n_de and 0 < n_de < 210, '%d vs %d' % (total(), n_de))
+          total() == n_de and 0 < n_de < 200, '%d vs %d' % (total(), n_de))
         decoche_tout()
 
         # --- multi-devises : une fiche polonaise ne s affiche pas en dollars
@@ -344,13 +348,21 @@ try:
         # --- panneau categories
         pg.click('a[data-nav="cats"]')
         pg.wait_for_timeout(300)
-        t('le panneau des categories liste les 21',
-          pg.locator('.cats-liste button').count() == 21,
+        t('le panneau des categories liste les 20',
+          pg.locator('.cats-liste button').count() == 20,
           str(pg.locator('.cats-liste button').count()))
-        pg.locator('.cats-liste button[data-chip="hotellerie"]').click()
+        # La categorie est LUE dans les donnees, pas ecrite en dur : « hotellerie »
+        # etait code ici, et le jour ou l'hotellerie est passee dans sa propre
+        # section le controle a cherche un bouton qui n'existait plus. Et on
+        # compare au nombre reel de fiches de cette categorie, pas a 10.
+        cle_cat = D['categories'][0]['cle']
+        n_cat = sum(1 for f in FI if f['categorie'] == cle_cat)
+        pg.locator('.cats-liste button[data-chip="%s"]' % cle_cat).click()
         pg.wait_for_timeout(300)
-        t('cliquer une categorie ferme le panneau et filtre',
-          pg.locator('#panneau.on').count() == 0 and total() == 10, str(total()))
+        t('cliquer la categorie « %s » ferme le panneau et filtre sur ses %d '
+          'fiches' % (cle_cat, n_cat),
+          pg.locator('#panneau.on').count() == 0 and total() == n_cat,
+          str(total()))
         decoche_tout()
 
         # --- fiche + demande d information (le produit)

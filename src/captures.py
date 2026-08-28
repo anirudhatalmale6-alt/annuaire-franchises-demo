@@ -10,7 +10,8 @@ import time
 import urllib.request
 
 ICI = os.path.dirname(os.path.abspath(__file__))
-DEMO = os.path.join(ICI, 'demo')
+from chemins import dossier_pages   # noqa: E402
+DEMO = dossier_pages(ICI)
 from playwright.sync_api import sync_playwright
 
 s = socket.socket(); s.bind(('127.0.0.1', 0)); port = s.getsockname()[1]; s.close()

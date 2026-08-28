@@ -21,6 +21,7 @@ header{background:var(--encre);color:#fff;position:sticky;top:0;z-index:30}
 .logo{font-weight:800;font-size:19px;letter-spacing:-.2px}
 .logo b{color:var(--lime)}
 .logo span{font-weight:400;font-size:12px;color:#8b93a5;margin-left:8px}
+.logo .ph-marque{border:1px dashed #3a4150;border-radius:5px;padding:1px 7px;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
 .top nav{display:flex;gap:18px;font-size:13.5px;color:#aeb5c2;margin-left:8px}
 .top nav a{cursor:pointer}
 .top nav a:hover{color:#fff}
@@ -181,15 +182,32 @@ footer{border-top:1px solid var(--trait);background:#fff;padding:24px 0 44px;
   .top nav{display:none}
   .cats-liste{columns:1}
 }
+/* Sur telephone, le libelle de marque + la pastille « marque a definir » +
+   le selecteur de langue depassaient de 12 px et poussaient une barre de
+   defilement laterale sur toute la page. On reduit, on ne cache pas : la
+   pastille dit que le nom n'est pas arrete, elle doit se voir partout. */
+@media(max-width:560px){
+  .top{gap:10px;padding:12px 14px}
+  .logo{font-size:16px}
+  .logo .ph-marque{font-size:9.5px;padding:1px 5px;margin-left:6px}
+  .lang button{padding:6px 9px}
+}
 </style>
 
 <header>
   <div class="wrap top">
-    <div class="logo">Franchise<b>.</b>Direct<span id="lg-pays"></span></div>
+    <!-- Nom de marque PLACEHOLDER. L'ancien libelle « Franchise.Direct »
+     etait a une lettre du nom d'un annuaire existant : pose sur une
+     demonstration, c'est la marque d'un tiers portee par une page qui
+     n'est pas la sienne. -->
+    <div class="logo">Annuaire<b>.</b>Franchises<span class="ph-marque">marque a definir</span><span id="lg-pays"></span></div>
     <nav>
       <a data-nav="annuaire" id="nv1"></a>
       <a data-nav="cats" id="nv2"></a>
       <a data-nav="inscrire" id="nv3"></a>
+      <!-- L'hotellerie a sa propre page : elle ne se compare pas aux
+           autres metiers sur les memes colonnes. -->
+      <a href="hotellerie.html" id="nv4"></a>
     </nav>
     <div class="droite">
       <div class="lang">
@@ -255,7 +273,7 @@ footer{border-top:1px solid var(--trait);background:#fff;padding:24px 0 44px;
       l'Allemagne, les autres filtres restant en place. Un compteur calcule
       sur le resultat final afficherait « 0 » partout : exact, inutile.
 
-   4. Tout est en memoire, 210 fiches. Le meme code tient a 5 000. Au-dela, on
+   4. Tout est en memoire, 200 fiches. Le meme code tient a 5 000. Au-dela, on
       passe les filtres cote serveur — le format des donnees ne change pas,
       seule la source change.
    ========================================================================== */
@@ -267,7 +285,8 @@ var T = {
   fr: {
     pays_h: 'CA / US / EU',
     nv1: 'Annuaire', nv2: 'Categories', nv3: 'Inscrire une enseigne',
-    demo: 'Demonstration. Les 210 enseignes ci-dessous sont <b>fictives</b> et les montants sont tires dans les bandes reelles de chaque metier. Aucune marque reelle, aucun chiffre reel. Le moteur, lui, est le vrai.',
+    nv4: 'Hotellerie',
+    demo: 'Demonstration. Les 200 enseignes ci-dessous sont <b>fictives</b> et les montants sont tires dans les bandes reelles de chaque metier. Aucune marque reelle, aucun chiffre reel. Le moteur, lui, est le vrai.',
     h1: 'Trouvez la franchise qui correspond a votre budget, dans votre pays.',
     hp: 'Canada, Etats-Unis et Europe. Comparez les enseignes par secteur, par investissement et par pays, puis demandez de l\'information directement au franchiseur.',
     qph: 'Enseigne, secteur, mot-cle...', qb: 'Rechercher',
@@ -322,7 +341,8 @@ var T = {
   en: {
     pays_h: 'CA / US / EU',
     nv1: 'Directory', nv2: 'Categories', nv3: 'List your brand',
-    demo: 'Demonstration. The 210 brands below are <b>fictional</b> and the figures are drawn within the real ranges of each trade. No real brand, no real number. The engine itself is real.',
+    nv4: 'Hospitality',
+    demo: 'Demonstration. The 200 brands below are <b>fictional</b> and the figures are drawn within the real ranges of each trade. No real brand, no real number. The engine itself is real.',
     h1: 'Find the franchise that fits your budget, in your country.',
     hp: 'Canada, the United States and Europe. Compare brands by sector, investment and country, then request information directly from the franchisor.',
     qph: 'Brand, sector, keyword...', qb: 'Search',
@@ -781,6 +801,8 @@ function rendChrome(){
   document.getElementById('nv1').textContent = t('nv1');
   document.getElementById('nv2').textContent = t('nv2');
   document.getElementById('nv3').textContent = t('nv3');
+  document.getElementById('nv4').textContent = t('nv4');
+  document.getElementById('nv4').href = 'hotellerie.html?l=' + L;
   document.getElementById('bdemo').innerHTML = t('demo');
   document.getElementById('h1').textContent = t('h1');
   document.getElementById('hp').textContent = t('hp');

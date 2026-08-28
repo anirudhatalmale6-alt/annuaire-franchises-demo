@@ -32,7 +32,8 @@ import os
 import random
 
 ICI = os.path.dirname(os.path.abspath(__file__))
-DEMO = os.path.join(ICI, 'demo')
+from chemins import dossier_pages   # noqa: E402
+DEMO = dossier_pages(ICI)
 
 # ---------------------------------------------------------------------------
 # LES PAYS. Le repertoire couvre trois marches : Canada, Etats-Unis, Europe.
@@ -135,12 +136,16 @@ CATEGORIES = [
      68000, 340000, 20000, 41000, (5.0, 8.0)),
     ('aines', 'Services aux aines', 'Senior care',
      54000, 238000, 27000, 54000, (5.0, 8.0)),
-    ('hotellerie', 'Hotellerie', 'Hospitality',
-     816000, 6100000, 34000, 102000, (4.0, 8.0)),
 ]
 
 # ---------------------------------------------------------------------------
-# 210 enseignes fictives : 5 nord-americaines et 5 europeennes par categorie.
+# 200 enseignes fictives : 5 nord-americaines et 5 europeennes par categorie.
+# L'HOTELLERIE N'EST PLUS ICI : elle a sa propre section (hotels.py), parce
+# qu'une enseigne hoteliere ne se compare pas a un commerce sur les memes
+# colonnes — on y investit AU NOMBRE DE CLES, on paie une redevance de marque
+# ET une redevance de commercialisation, et le contrat peut etre une franchise
+# ou un contrat de gestion. Melangee ici, elle faussait aussi le filtre par
+# tranche : un hotel a plusieurs millions ecrasait toutes les fourchettes.
 # Les noms sont inventes ; leur sonorite suit le marche vise pour que la demo
 # soit credible a l'oeil sans emprunter le nom de personne.
 # (nom, resume fr, resume en, region d'origine)
@@ -386,18 +391,6 @@ ENSEIGNES = {
         ('HomeCare Partners', 'Aide a domicile sur mesure', 'Tailored home care', 'eu'),
         ('Residence Age d\'Or', 'Residence services pour seniors', 'Serviced residence for seniors', 'eu'),
     ],
-    'hotellerie': [
-        ('Auberge du Portage', 'Auberge de charme en region', 'Regional boutique inn', 'na'),
-        ('Hotel Cap Nord', 'Hotel d\'affaires de centre-ville', 'Downtown business hotel', 'na'),
-        ('Chalets Foret Blanche', 'Chalets locatifs quatre saisons', 'Four-season rental cabins', 'na'),
-        ('Motel Route 40', 'Motel routier renove', 'Renovated highway motel', 'na'),
-        ('Suites Longue Duree', 'Suites en sejour prolonge', 'Extended-stay suites', 'na'),
-        ('Auberge du Vieux Pont', 'Auberge de charme et table', 'Boutique inn with restaurant', 'eu'),
-        ('Hotel Stadtblick', 'Hotel urbain pour clientele d\'affaires', 'Urban hotel for business guests', 'eu'),
-        ('Chalets Alpina', 'Chalets et appartements de montagne', 'Mountain chalets and apartments', 'eu'),
-        ('Rest Stop Inns', 'Hotels d\'etape en bord d\'autoroute', 'Roadside stopover hotels', 'eu'),
-        ('LongStay Suites Europe', 'Appart-hotels en sejour prolonge', 'Extended-stay aparthotels', 'eu'),
-    ],
 }
 
 FORMATS = [
@@ -432,7 +425,6 @@ FORMATS_PAR_CAT = {
     'animalerie': ['local', 'mobile'],
     'logistique': ['local', 'mobile', 'master'],
     'aines': ['local', 'domicile'],
-    'hotellerie': ['local'],
 }
 
 # Tranches, en EUROS de reference (voir TAUX_EUR).
@@ -505,8 +497,6 @@ ORIGINE_EU = {
     'Presence a Domicile': 'FR', 'SeniorHilfe Pflege': 'DE',
     'Assistenza Sereni': 'IT', 'HomeCare Partners': 'GB',
     'Residence Age d\'Or': 'BE',
-    'Auberge du Vieux Pont': 'FR', 'Hotel Stadtblick': 'DE', 'Chalets Alpina': 'AT',
-    'Rest Stop Inns': 'GB', 'LongStay Suites Europe': 'NL',
 }
 
 

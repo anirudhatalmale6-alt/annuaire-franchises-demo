@@ -1,10 +1,17 @@
 # Annuaire de franchises — Canada, Etats-Unis, Europe
 
 Le moteur de recherche, les categories, les filtres, la fiche enseigne, la
-mise en relation et le depot de fiche par les franchiseurs.
+mise en relation et le depot de fiche par les franchiseurs. Plus une
+**section hotellerie a part**, avec ses propres colonnes.
 
 **Demonstration en ligne :**
 https://anirudhatalmale6-alt.github.io/annuaire-franchises-demo/
+(la section hotellerie : `/hotellerie.html`)
+
+Le nom affiche en haut a gauche est un **placeholder**, marque « marque a
+definir ». L'ancien libelle etait a une lettre du nom d'un annuaire qui
+existe pour de vrai — pose sur une demonstration, c'est la marque d'un tiers
+portee par une page qui n'est pas la sienne.
 
 ## Ce que c'est, et ce que ce n'est pas
 
@@ -14,7 +21,8 @@ d'information qui part chez le franchiseur. C'est pour ca que « Demander de
 l'information » est le bouton principal de chaque carte, et pas un lien en bas
 de page.
 
-Les 210 enseignes affichees sont **fictives**, et c'est volontaire :
+Les 200 enseignes de l'annuaire generaliste et les 29 marques hotelieres
+sont **fictives**, et c'est volontaire :
 
 - Je ne recopie pas la base de franchisedirect.com. C'est leur actif, et une
   fiche recopiee est fausse le jour ou l'enseigne change son droit d'entree.
@@ -30,8 +38,8 @@ deux reconstructions donnent le meme fichier, au caractere pres.
 
 | | |
 |---|---|
-| enseignes | 210 |
-| categories | 21, dont **concessionnaires automobiles** et **duty free / boutiques d'aeroport** |
+| enseignes | 200 |
+| categories | 20, dont **concessionnaires automobiles** et **duty free / boutiques d'aeroport** |
 | pays | 22 : Canada, Etats-Unis et 20 pays d'Europe |
 | regions | 5 |
 | devises | 12, chaque fiche affichee dans la sienne |
@@ -39,6 +47,9 @@ deux reconstructions donnent le meme fichier, au caractere pres.
 | tris | pertinence, investissement croissant/decroissant, unites, franchisage recent, A-Z |
 | langues | francais et anglais, y compris le format des montants (`265 000 $ US` / `US$265,000`, `1 280 000 PLN`) |
 | controles | **76, tous verts** (`python3 tests.py`) |
+
+L'hotellerie **n'est plus une categorie de cette liste** : voir la section
+dediee plus bas.
 
 ### Le multi-devises, en une phrase
 
@@ -75,10 +86,77 @@ Quatre choix qui ne se voient pas mais qui comptent :
    verifie que les 105 enseignes europeennes ont toutes leur pays declare, et
    qu'aucune entree de la table ne designe une enseigne qui n'existe plus.
 
+## La section hotellerie
+
+**Fichiers :** `hotels.py` (donnees), `page_hotels.py` (page),
+`demo/hotellerie.json`, `demo/hotellerie.html`,
+`import-modele-hotellerie.csv`, `tests-hotels.py`, `captures-hotels.py`.
+
+L'hotellerie a ete **sortie** de l'annuaire generaliste. Ce n'est pas une
+question de rangement : une enseigne hoteliere ne se compare pas a un
+commerce sur les memes colonnes.
+
+| | l'annuaire generaliste | l'hotellerie |
+|---|---|---|
+| l'investissement | un montant pour le projet | **au nombre de cles** |
+| la redevance | une | **deux** : marque, puis commercialisation et fidelite |
+| le contrat | une franchise | franchise, **contrat de gestion**, bail, developpement |
+| la taille | le format d'exploitation | **une fourchette de cles acceptee** |
+| l'enseigne | seule | portee par un **groupe** qui a plusieurs marques |
+| l'existant | sans objet | **conversion** d'un hotel deja debout |
+
+Melangee aux autres metiers, elle faussait aussi le filtre par tranche : un
+projet a plusieurs millions ecrase les fourchettes de tous les autres.
+
+| | |
+|---|---|
+| marques | 29 |
+| groupes | 10, chacun portant 2 a 4 marques |
+| segments | 7 : economique, milieu de gamme, milieu de gamme superieur, haut de gamme, luxe, appart-hotel, lifestyle |
+| types de contrat | 4 |
+| filtres | segment, type de contrat, investissement par cle, **taille de mon hotel**, conversion, region, pays |
+| tris | pertinence, investissement/cle croissant et decroissant, taille du reseau, A-Z |
+| langues | francais et anglais |
+| controles | **60, tous verts** (`python3 tests-hotels.py`) |
+
+Quatre choix qui portent tout le reste :
+
+1. **Le cout du projet n'est pas tire, il est CALCULE.** C'est
+   l'investissement a la cle multiplie par la taille acceptee. Tire a part,
+   il finit toujours par contredire le prix a la cle affiche juste au-dessus
+   — et c'est le chiffre sur lequel un investisseur decide. Un controle
+   verifie l'egalite sur les 29 fiches.
+
+2. **Le filtre « taille de mon hotel » demande l'appartenance, pas un
+   minimum.** La question reelle est « mon hotel fait 120 chambres, quelles
+   enseignes le prennent » : 120 doit tomber DANS la fourchette acceptee.
+   Un filtre « a partir de » aurait repondu a une autre question.
+
+3. **Un contrat de gestion n'existe pas sur un economique de 70 chambres**
+   — les honoraires ne paieraient pas l'equipe du groupe. Le tableau des
+   contrats possibles est fixe par segment, et deux controles l'imposent :
+   aucune enseigne economique en gestion, toute enseigne de luxe en gestion.
+
+4. **Un groupe ne porte jamais deux marques dans le meme segment.** C'est
+   ainsi que sont batis les portefeuilles de marques hotelieres ; deux
+   marques du meme groupe sur le meme creneau se cannibalisent. Controle.
+
+Et deux details qui se voient : le reseau affiche `hotels x taille moyenne =
+cles` (tire a part, on obtenait 40 hotels et 900 cles, soit 22 chambres
+l'unite), et le droit d'entree s'ecrit comme dans le metier — **tant par
+cle, avec un plancher** — parce que pour un petit hotel c'est le plancher
+qui s'applique.
+
+Une seule feuille de style pour les deux pages : `page_hotels.py` la LIT
+dans `index.html` et l'injecte. Les deux fichiers restent autonomes — un
+seul fichier a televerser, rien a lier — mais le style n'a qu'une source. Un
+controle verifie que le bloc partage est identique au caractere pres.
+
 ## Remplacer les fiches de demonstration par les vraies
 
 Le format d'entree est dans `import-modele.csv` (point-virgule, UTF-8, deux
-lignes remplies en exemple). Les colonnes suffisent a produire une fiche
+lignes remplies en exemple) ; celui de l'hotellerie dans
+`import-modele-hotellerie.csv`, qui a ses propres colonnes. Les colonnes suffisent a produire une fiche
 complete ; le moteur ne lit rien d'autre. Quand les vraies enseignes arrivent
 — les siennes comprises — elles remplacent le fichier sans toucher une ligne
 du moteur.
@@ -86,10 +164,17 @@ du moteur.
 ## Reconstruire
 
 ```
-python3 donnees.py    # fabrique demo/catalogue.json + import-modele.csv
-python3 tests.py      # 76 controles : donnees, puis moteur dans un vrai navigateur
-python3 captures.py   # les 9 captures
+python3 donnees.py         # demo/catalogue.json + import-modele.csv
+python3 tests.py           # 76 controles : donnees, puis moteur dans un navigateur
+python3 captures.py        # les 9 captures de l'annuaire
+
+python3 hotels.py          # demo/hotellerie.json + import-modele-hotellerie.csv
+python3 page_hotels.py     # demo/hotellerie.html
+python3 tests-hotels.py    # 60 controles
+python3 captures-hotels.py # les 7 captures de la section
 ```
+
+**136 controles au total, tous verts.**
 
 ## Comment un annuaire grandit
 
